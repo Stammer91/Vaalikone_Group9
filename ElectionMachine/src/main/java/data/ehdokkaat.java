@@ -20,7 +20,6 @@ public class ehdokkaat {
 		this.setEtunimi(etunimi);
 		this.setPuolue(puolue);
 		this.setKotipaikkakunta(kunta);
-		
 		setIka(ika);
 		this.setMiksi_eduskuntaan(miksi);
 		this.setMita_asioita_haluat_edistaa(mita);
@@ -33,8 +32,8 @@ public class ehdokkaat {
 	public int getEhdokas_Id() {
 		return ehdokas_id;
 	}
-	public void setEhdokas_Id(int id) {
-		this.ehdokas_id = id;
+	public void setEhdokas_Id(int ehdokas_id) {
+		this.ehdokas_id = ehdokas_id;
 	}
 	public void setEhdokas_Id(String ehdokas_id) {
 		try {

@@ -1,41 +1,75 @@
 package app;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class Add
- */
+import dao.dao;
+import data.ehdokkaat;
+
+
 @WebServlet("/Add")
 public class Add extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private dao dao = null;
+	
+	public void init() {
+		dao = new dao("jdbc:mysql://localhost:3306/vaalikone", "root", "salasana");
+	}
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public Add() {
-        super();
-        // TODO Auto-generated constructor stub
+        super();   
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		ArrayList<ehdokkaat> list = null;
+		if (dao.getConnection()) {
+			list = dao.readAllEhdokkaat();
+		} else {
+			System.out.println("No connection to database");
+		}
+		
+		request.setAttribute("EhdokkaatLista", list);
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/AddEhdokkaat.jsp");
+		rd.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String ehdokas_id_string = request.getParameter("ehdokas_id");
+		String etunimi = request.getParameter("etunimi");
+		String sukunimi = request.getParameter("sukunimi");
+		String puolue = request.getParameter("puolue");
+		String kotipaikkakunta = request.getParameter("kotipaikkakunta");
+		String ika_string = request.getParameter("ika");
+		String miksi_eduskuntaan = request.getParameter("miksi_eduskuntaan");
+		String mita_asioita_haluat_edistaa = request.getParameter("mita_asioita_haluat_edistaa");
+		String ammatti = request.getParameter("ammatti");
+
+		int ehdokas_id = Integer.parseInt(ehdokas_id_string);
+		int ika = Integer.parseInt(ika_string);
+		
+		ehdokkaat E=new ehdokkaat(ehdokas_id, etunimi, sukunimi, puolue, kotipaikkakunta, ika, miksi_eduskuntaan,
+				mita_asioita_haluat_edistaa, ammatti);
+		
+		ArrayList<ehdokkaat> list=null;
+		if (dao.getConnection()) {
+			list=dao.readAllEhdokkaat();
+		}
+		
+		request.setAttribute("EhdokkaatLista", list);
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/AddEhdokkaat.jsp");
+		rd.forward(request, response);
 	}
 
 }
