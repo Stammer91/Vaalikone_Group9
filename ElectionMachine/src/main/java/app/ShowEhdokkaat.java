@@ -10,18 +10,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.dao;
+import dao.Dao;
 import data.ehdokkaat;
 
 @WebServlet("/ShowEhdokkaat")
 public class ShowEhdokkaat extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
-	 dao dao = null;
+	 Dao dao = null;
 	
 	@Override
 	public void init() {
-		dao=new dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Johannes1998");
+		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Johannes1998");
 	}
        
     public ShowEhdokkaat() {
@@ -36,11 +36,12 @@ public class ShowEhdokkaat extends HttpServlet{
 		else {
 			System.out.println("No connection to database");
 		}
+		
 	
 		request.setAttribute("EhdokasLista", list);
 
 		RequestDispatcher rd=request.getRequestDispatcher("/jsp/ShowEhdokkaat.jsp");
-		rd.forward(request, response); 
+		rd.forward(request, response);
 		
 	}	
 

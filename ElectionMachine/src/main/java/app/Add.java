@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.dao;
+import dao.Dao;
 import data.ehdokkaat;
 
 
@@ -18,10 +18,10 @@ import data.ehdokkaat;
 public class Add extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private dao dao = null;
+	private Dao dao = null;
 	
 	public void init() {
-		dao = new dao("jdbc:mysql://localhost:3306/vaalikone", "root", "salasana");
+		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "salasana");
 	}
        
     public Add() {

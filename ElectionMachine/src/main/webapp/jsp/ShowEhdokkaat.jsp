@@ -2,36 +2,25 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="java.util.ArrayList" %>   
-<%@ page import="data.*" %> 
-<%@ page import="dao.dao" %>
+<%@ page import="data.*" %>
+<%@ page import="dao.Dao" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Ehdokkaat</title>
-</head>
 
+    
 
 <c:forEach var="ehdokas" items="${requestScope.EhdokasLista}" >
-<h2><b>${ehdokas.ehdokas_id}:</b> ${ehdokas.etunimi} ${ehdokas.sukunimi} </h2>
-<b>Puolue: </b><br>
-${ehdokas.puolue} <br>
-<b>Kotipaikkakunta:</b><br>
-${ehdokas.kotipaikkakunta}<br>
-<b>Ikä: </b><br>
-${ehdokas.ika}<br>
-<b>Ammatti:</b><br>
-${ehdokas.ammatti}<br>
-<b>Miksi haluat eduskuntaan?</b><br>
-${ehdokas.miksi_eduskuntaan}<br>
-<b>Mitä asioita haluat edistää?</b><br>
-${ehdokas.mita_asioita_haluat_edistaa}<br>
-<br> <br>
-
+<div class="card">
+  <h1>${ehdokas.etunimi} ${ehdokas.sukunimi}</h1>
+  <b><u>Puolue</u></b>
+  <p>${ehdokas.puolue}</p>
+  <b><u>Kotipaikkakunta</u></b>
+  <p>${ehdokas.kotipaikkakunta}</p>
+  <b><u>Ammatti</u></b>
+  <p>${ehdokas.ammatti}</p>
+  <b><u>Miksi haluat eduskuntaan?</u></b>
+  <p>${ehdokas.miksi_eduskuntaan}</p>
+  <b><u>Mitä asioita haluat edistää?</u></b>
+  <p>${ehdokas.mita_asioita_haluat_edistaa}</p>
+</div>
 </c:forEach>
-
-
-</html>
