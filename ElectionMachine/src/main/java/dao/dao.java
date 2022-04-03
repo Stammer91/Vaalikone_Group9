@@ -11,13 +11,13 @@ import data.ehdokkaat;
 
 import java.sql.Connection;
 
-public class dao {
+public class Dao {
 	private String url;
 	private String user;
 	private String pass;
 	private Connection conn;
 	
-	public dao(String url, String user, String pass) {
+	public Dao(String url, String user, String pass) {
 		this.url=url;
 		this.user=user;
 		this.pass=pass;
@@ -90,7 +90,7 @@ public class dao {
 		}
 	}
 
-	public ehdokkaat readEhdokkaat(String id) {
+	public ehdokkaat readEhdokas(String id) {
 		ehdokkaat ehdokas=null;
 		try {
 			String sql="select * from ehdokkaat where id=?";
