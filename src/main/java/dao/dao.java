@@ -1,8 +1,6 @@
 package dao;
 
 import java.sql.DriverManager;
-
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,13 +11,13 @@ import data.ehdokkaat;
 
 import java.sql.Connection;
 
-public class dao {
+public class Dao {
 	private String url;
 	private String user;
 	private String pass;
 	private Connection conn;
 	
-	public dao(String url, String user, String pass) {
+	public Dao(String url, String user, String pass) {
 		this.url=url;
 		this.user=user;
 		this.pass=pass;
@@ -48,17 +46,17 @@ public class dao {
 			Statement stmt=conn.createStatement();
 			ResultSet RS=stmt.executeQuery("select * from ehdokkaat");
 			while (RS.next()){
-				ehdokkaat ehdokkaat=new ehdokkaat();
-				ehdokkaat.setEhdokas_Id(RS.getInt("ehdokas_id"));
-				ehdokkaat.setSukunimi(RS.getString("sukunimi"));
-				ehdokkaat.setEtunimi(RS.getString("etunimi"));
-				ehdokkaat.setPuolue(RS.getString("puolue"));
-				ehdokkaat.setKotipaikkakunta(RS.getString("kotipaikkakunta"));
-				ehdokkaat.setIka(RS.getInt("ika"));
-				ehdokkaat.setMiksi_eduskuntaan(RS.getString("miksi_eduskuntaan"));
-				ehdokkaat.setMita_asioita_haluat_edistaa(RS.getString("mita_asioita_haluat_edistaa"));
-				ehdokkaat.setAmmatti(RS.getString("ammatti"));
-				list.add(ehdokkaat);
+				ehdokkaat ehdokas=new ehdokkaat();
+				ehdokas.setEhdokas_Id(RS.getInt("ehdokas_id"));
+				ehdokas.setSukunimi(RS.getString("sukunimi"));
+				ehdokas.setEtunimi(RS.getString("etunimi"));
+				ehdokas.setPuolue(RS.getString("puolue"));
+				ehdokas.setKotipaikkakunta(RS.getString("kotipaikkakunta"));
+				ehdokas.setIka(RS.getInt("ika"));
+				ehdokas.setMiksi_eduskuntaan(RS.getString("miksi_eduskuntaan"));
+				ehdokas.setMita_asioita_haluat_edistaa(RS.getString("mita_asioita_haluat_edistaa"));
+				ehdokas.setAmmatti(RS.getString("ammatti"));
+				list.add(ehdokas);
 			}
 			return list;
 		}
@@ -68,7 +66,7 @@ public class dao {
 	}
 	public ArrayList<ehdokkaat> updateEhdokkaat(ehdokkaat E) {
 		try {
-			String sql="update ehdokkaat set Etunimi=? where id=?";
+			String sql="update ehdokkaat set etunimi=? where id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, E.getEtunimi());
 			pstmt.setInt(2, E.getEhdokas_Id());
@@ -92,26 +90,26 @@ public class dao {
 		}
 	}
 
-	public ehdokkaat readEhdokkaat(String id) {
-		ehdokkaat ehdokkaat=null;
+	public ehdokkaat readEhdokas(String id) {
+		ehdokkaat ehdokas=null;
 		try {
 			String sql="select * from ehdokkaat where id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet RS=pstmt.executeQuery();
 			while (RS.next()){
-				ehdokkaat=new ehdokkaat();
-				ehdokkaat.setEhdokas_Id(RS.getInt("ehdokas_id"));
-				ehdokkaat.setSukunimi(RS.getString("sukunimi"));
-				ehdokkaat.setEtunimi(RS.getString("etunimi"));
-				ehdokkaat.setPuolue(RS.getString("puolue"));
-				ehdokkaat.setKotipaikkakunta(RS.getString("kotipaikkakunta"));
-				ehdokkaat.setIka(RS.getInt("ika"));
-				ehdokkaat.setMiksi_eduskuntaan(RS.getString("miksi_eduskuntaan"));
-				ehdokkaat.setMita_asioita_haluat_edistaa(RS.getString("mita_asioita_haluat_edistaa"));
-				ehdokkaat.setAmmatti(RS.getString("ammatti"));
+				ehdokas=new ehdokkaat();
+				ehdokas.setEhdokas_Id(RS.getInt("ehdokas_id"));
+				ehdokas.setSukunimi(RS.getString("sukunimi"));
+				ehdokas.setEtunimi(RS.getString("etunimi"));
+				ehdokas.setPuolue(RS.getString("puolue"));
+				ehdokas.setKotipaikkakunta(RS.getString("kotipaikkakunta"));
+				ehdokas.setIka(RS.getInt("ika"));
+				ehdokas.setMiksi_eduskuntaan(RS.getString("miksi_eduskuntaan"));
+				ehdokas.setMita_asioita_haluat_edistaa(RS.getString("mita_asioita_haluat_edistaa"));
+				ehdokas.setAmmatti(RS.getString("ammatti"));
 			}
-			return ehdokkaat;
+			return ehdokas;
 		}
 		catch(SQLException e) {
 			return null;

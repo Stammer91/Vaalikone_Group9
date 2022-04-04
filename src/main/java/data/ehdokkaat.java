@@ -12,29 +12,29 @@ public class ehdokkaat {
 	private String mita_asioita_haluat_edistaa;
 	private String ammatti;
 	
-	public ehdokkaat(int id, String sukunimi, String etunimi, String puolue, String kunta, 
-					 int ika, String miksi, String mita, String ammatti) {
-		
-		setEhdokas_Id(id);
-		this.setSukunimi(sukunimi);
-		this.setEtunimi(etunimi);
-		this.setPuolue(puolue);
-		this.setKotipaikkakunta(kunta);
-		
-		setIka(ika);
-		this.setMiksi_eduskuntaan(miksi);
-		this.setMita_asioita_haluat_edistaa(mita);
-		this.setAmmatti(ammatti);
-		
-	}
 	public ehdokkaat() {
 		
 	}
+	
+	public ehdokkaat(int ehdokas_id, String sukunimi, String etunimi, String puolue, String kunta, int ika, String miksi, String mita, String ammatti) {
+		
+		setEhdokas_Id(ehdokas_id);
+		this.sukunimi = sukunimi;
+		this.etunimi = etunimi;
+		this.puolue = puolue;
+		this.kotipaikkakunta = kunta;
+		setIka(ika);
+		this.miksi_eduskuntaan = miksi;
+		this.mita_asioita_haluat_edistaa = mita;
+		this.ammatti = ammatti;
+		
+	}
+	
 	public int getEhdokas_Id() {
 		return ehdokas_id;
 	}
-	public void setEhdokas_Id(int id) {
-		this.ehdokas_id = id;
+	public void setEhdokas_Id(int ehdokas_id) {
+		this.ehdokas_id = ehdokas_id;
 	}
 	public void setEhdokas_Id(String ehdokas_id) {
 		try {
