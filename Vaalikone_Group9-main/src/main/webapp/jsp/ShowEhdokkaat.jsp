@@ -7,7 +7,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-    
+<%@ include file="../header.html" %>
 
 <c:forEach var="ehdokas" items="${requestScope.EhdokasLista}" >
 <div class="card">
@@ -24,3 +24,5 @@
   <p>${ehdokas.mita_asioita_haluat_edistaa}</p>
 </div>
 </c:forEach>
+
+<%@ include file="../footer.html" %>
