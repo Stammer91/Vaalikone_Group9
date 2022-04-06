@@ -11,11 +11,13 @@
 
 <c:forEach var="ehdokas" items="${requestScope.EhdokasLista}" >
 <div class="card">
-  <h1>${ehdokas.etunimi} ${ehdokas.sukunimi}</h1>
+  <h1>${ehdokas.etunimi} ${ehdokas.sukunimi} &nbsp;N:o ${ehdokas.aanestysnumero}</h1>
   <b><u>Puolue</u></b>
   <p>${ehdokas.puolue}</p>
   <b><u>Kotipaikkakunta</u></b>
   <p>${ehdokas.kotipaikkakunta}</p>
+  <b><u>Ikä</u></b>
+  <p>${ehdokas.ika}</p>
   <b><u>Ammatti</u></b>
   <p>${ehdokas.ammatti}</p>
   <b><u>Miksi haluat eduskuntaan?</u></b>
