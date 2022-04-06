@@ -55,12 +55,14 @@ public class Add extends HttpServlet {
 		String miksi_eduskuntaan = request.getParameter("miksi_eduskuntaan");
 		String mita_asioita_haluat_edistaa = request.getParameter("mita_asioita_haluat_edistaa");
 		String ammatti = request.getParameter("ammatti");
+		String aanestysnumero_string = request.getParameter("aanestysnumero");
 
 		int ehdokas_id = Integer.parseInt(ehdokas_id_string);
 		int ika = Integer.parseInt(ika_string);
+		int aanestysnumero = Integer.parseInt(aanestysnumero_string);
 		
 		ehdokkaat E=new ehdokkaat(ehdokas_id, etunimi, sukunimi, puolue, kotipaikkakunta, ika, miksi_eduskuntaan,
-				mita_asioita_haluat_edistaa, ammatti);
+				mita_asioita_haluat_edistaa, ammatti, aanestysnumero);
 		
 		ArrayList<ehdokkaat> list=null;
 		if (dao.getConnection()) {
