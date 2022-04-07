@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream:ElectionMachine/src/main/java/dao/Dao.java
+<<<<<<< Updated upstream:ElectionMachine/src/main/java/dao/Dao.java
 package dao;
 
 import java.sql.DriverManager;
@@ -118,6 +119,8 @@ public class dao {
 	}
 }
 =======
+=======
+>>>>>>> Stashed changes:Vaalikone_Group9-main/src/main/java/dao/Dao.java
 package dao;
 
 import java.sql.DriverManager;
@@ -238,4 +241,3 @@ public class Dao {
 		}
 	}
 }
->>>>>>> Stashed changes:Vaalikone_Group9-main/src/main/java/dao/Dao.java

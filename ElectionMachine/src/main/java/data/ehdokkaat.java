@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream:ElectionMachine/src/main/java/data/ehdokkaat.java
+<<<<<<< Updated upstream:ElectionMachine/src/main/java/data/ehdokkaat.java
 package data;
 
 public class ehdokkaat {
@@ -109,6 +110,8 @@ public class ehdokkaat {
 		this.ammatti = ammatti;
 	}
 =======
+=======
+>>>>>>> Stashed changes:Vaalikone_Group9-main/src/main/java/data/ehdokkaat.java
 package data;
 
 public class ehdokkaat {
@@ -233,5 +236,4 @@ public class ehdokkaat {
 		catch(NumberFormatException | NullPointerException e) {
 		}
 	}
->>>>>>> Stashed changes:Vaalikone_Group9-main/src/main/java/data/ehdokkaat.java
 }
