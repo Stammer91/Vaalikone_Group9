@@ -78,11 +78,11 @@ public class Dao {
 			return null;
 		}
 	}
-	public ArrayList<ehdokkaat> deleteEhdokkaat(String id) {
+	public ArrayList<ehdokkaat> deleteEhdokkaat(String aanestysnumero) {
 		try {
-			String sql="delete from ehdokkaat where id=?";
+			String sql="delete from ehdokkaat where aanestysnumero=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, aanestysnumero);
 			pstmt.executeUpdate();
 			return readAllEhdokkaat();
 		}

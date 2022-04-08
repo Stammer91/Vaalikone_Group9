@@ -21,7 +21,7 @@ public class Add extends HttpServlet {
 	private Dao dao = null;
 	
 	public void init() {
-		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Johannes1998");
+		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "salasana");
 	}
        
     public Add() {
