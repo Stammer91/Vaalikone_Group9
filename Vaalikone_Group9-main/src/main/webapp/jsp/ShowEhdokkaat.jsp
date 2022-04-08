@@ -9,7 +9,7 @@
 
 <%@ include file="../header.html" %>
 
-<c:forEach var="ehdokas" items="${requestScope.EhdokasLista}" >
+<c:forEach var="ehdokas" items="${requestScope.EhdokasLista}">
 <div class="card">
   <h1>${ehdokas.etunimi} ${ehdokas.sukunimi} &nbsp;N:o ${ehdokas.aanestysnumero}</h1>
   <b><u>Puolue</u></b>

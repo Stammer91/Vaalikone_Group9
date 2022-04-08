@@ -14,6 +14,7 @@ public class ehdokkaat {
 	private int aanestysnumero;
 	
 
+
 	public ehdokkaat() {
 		
 	}
@@ -111,7 +112,7 @@ public class ehdokkaat {
 	public int getAanestysnumero() {
 		return aanestysnumero;
 	}
-
+	
 	public void setAanestysnumero(int aanestysnumero) {
 		this.aanestysnumero = aanestysnumero;
 	}
