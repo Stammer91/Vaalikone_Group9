@@ -10,7 +10,7 @@
 <%@ include file="../header.html" %>
 
 
-<form method="post" action="AddEhdokkaat">
+<form method="post" action="Add">
 <label for="ehdokas_id">ID</label> <br>
 <input type="text" id="ehdokas_id" name="ehdokas_id"> <br><br>
 <label for="etunimi">Etunimi</label> <br>
@@ -29,9 +29,21 @@
 <label for="mita_asioita_haluat_edistaa">Mitä asioita haluat edistää?</label> <br>
 <textarea id="mita_asioita_haluat_edistaa" name="mita_asioita_haluat_edistaa" rows="5" cols="50">
 </textarea> <br><br>
-<label for="Ammatti">Ammatti</label> <br>
-<input type="text" id="Ammatti" name="Ammatti"> <br><br>
-<input type="submit" value="Submit">
+<label for="ammatti">Ammatti</label> <br>
+<input type="text" id="ammatti" name="ammatti"> <br><br>
+
+<h1>Käytössä olevat äänestysnumerot</h1>
+<c:forEach var="ehdokas" items="${requestScope.EhdokasLista}" >
+
+<ul>
+  <li><b>${ehdokas.aanestysnumero}</b></li>
+</ul>
+ 
+</c:forEach>
+
+<label for="aanestysnumero">Äänestysnumero</label> <br>
+<input type="text" id="aanestysnumero" name="aanestysnumero"> <br><br>
+<input type="submit" value="Tallenna">
 </form>
 
 
