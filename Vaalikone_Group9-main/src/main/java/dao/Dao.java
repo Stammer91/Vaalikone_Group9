@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+
 import data.ehdokkaat;
 
 import java.sql.Connection;
@@ -40,6 +41,7 @@ public class Dao {
 			return false;
 		}
 	}
+	
 	public ArrayList<ehdokkaat> readAllEhdokkaat() {
 		ArrayList<ehdokkaat> list=new ArrayList<>();
 		try {
@@ -65,6 +67,30 @@ public class Dao {
 			return null;
 		}
 	}
+	
+	public ArrayList<ehdokkaat> addEhdokkaat(ehdokkaat E) {
+		String sql = "INSERT INTO ehdokkaat (ehdokas_id, sukunimi, etunimi, puolue, kotipaikkakunta, ika, miksi_eduskuntaan, mita_asioita_haluat_edistaa, ammatti, aanestysnumero) VALUES (?,?,?,?,?,?,?,?,?,?)";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, E.getEhdokas_Id());
+			pstmt.setString(2, E.getEtunimi());
+			pstmt.setString(3, E.getSukunimi());
+			pstmt.setString(4, E.getPuolue());
+			pstmt.setString(5, E.getKotipaikkakunta());
+			pstmt.setInt(6, E.getIka());
+			pstmt.setString(7, E.getMiksi_eduskuntaan());
+			pstmt.setString(8, E.getMita_asioita_haluat_edistaa());
+			pstmt.setString(9, E.getAmmatti());
+			pstmt.setInt(10, E.getAanestysnumero());
+			pstmt.executeUpdate();
+			return readAllEhdokkaat();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public ArrayList<ehdokkaat> updateEhdokkaat(ehdokkaat E) {
 		try {
 			String sql="update ehdokkaat set etunimi=? where id=?";
@@ -118,3 +144,4 @@ public class Dao {
 		}
 	}
 }
+
