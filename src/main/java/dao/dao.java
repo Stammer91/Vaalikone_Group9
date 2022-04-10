@@ -68,8 +68,16 @@ public class Dao {
 		try {
 			String sql="update ehdokkaat set etunimi=? where id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, E.getEtunimi());
-			pstmt.setInt(2, E.getEhdokas_Id());
+			pstmt.setInt(1, E.getEhdokas_Id());
+			pstmt.setString(2, E.getEtunimi());
+			pstmt.setString(3, E.getSukunimi());
+			pstmt.setString(4, E.getPuolue());
+			pstmt.setString(5, E.getKotipaikkakunta());
+			pstmt.setInt(6, E.getIka());
+			pstmt.setString(7, E.getMiksi_eduskuntaan());
+			pstmt.setString(8, E.getMita_asioita_haluat_edistaa());
+			pstmt.setString(9, E.getAmmatti());
+			pstmt.setInt(10, E.getAanestysnumero());
 			pstmt.executeUpdate();
 			return readAllEhdokkaat();
 		}
