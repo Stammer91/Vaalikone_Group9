@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 
 import data.ehdokkaat;
+import data.kysymykset;
 
 import java.sql.Connection;
 
@@ -138,6 +139,23 @@ public class Dao {
 				ehdokas.setAanestysnumero(RS.getInt("aanestysnumero"));
 			}
 			return ehdokas;
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+	public ArrayList<kysymykset> readAllKysymykset() {
+		ArrayList<kysymykset> list=new ArrayList<>();
+		try {
+			Statement stmt=conn.createStatement();
+			ResultSet RS=stmt.executeQuery("select * from kysymykset");
+			while (RS.next()){
+				kysymykset kysymys=new kysymykset();
+				kysymys.setId(RS.getInt("kysymys_id"));
+				kysymys.setKysymys(RS.getString("kysymys"));
+				list.add(kysymys);
+			}
+			return list;
 		}
 		catch(SQLException e) {
 			return null;

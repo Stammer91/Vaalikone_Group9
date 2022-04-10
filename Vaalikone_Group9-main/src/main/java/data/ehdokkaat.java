@@ -19,9 +19,9 @@ public class ehdokkaat {
 		
 	}
 	
-	public ehdokkaat(int ehdokas_id, String sukunimi, String etunimi, String puolue, String kunta, int ika, String miksi, String mita, String ammatti, int aanestysnumero) {
+	public ehdokkaat(int id, String sukunimi, String etunimi, String puolue, String kunta, int ika, String miksi, String mita, String ammatti, int aanestysnumero) {
 		
-		setEhdokas_Id(ehdokas_id);
+		setEhdokas_Id(id);
 		this.sukunimi = sukunimi;
 		this.etunimi = etunimi;
 		this.puolue = puolue;
