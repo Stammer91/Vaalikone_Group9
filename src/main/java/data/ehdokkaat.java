@@ -11,14 +11,17 @@ public class ehdokkaat {
 	private String miksi_eduskuntaan;
 	private String mita_asioita_haluat_edistaa;
 	private String ammatti;
+	private int aanestysnumero;
 	
+
+
 	public ehdokkaat() {
 		
 	}
 	
-	public ehdokkaat(int ehdokas_id, String sukunimi, String etunimi, String puolue, String kunta, int ika, String miksi, String mita, String ammatti) {
+	public ehdokkaat(int id, String sukunimi, String etunimi, String puolue, String kunta, int ika, String miksi, String mita, String ammatti, int aanestysnumero) {
 		
-		setEhdokas_Id(ehdokas_id);
+		setEhdokas_Id(id);
 		this.sukunimi = sukunimi;
 		this.etunimi = etunimi;
 		this.puolue = puolue;
@@ -27,6 +30,7 @@ public class ehdokkaat {
 		this.miksi_eduskuntaan = miksi;
 		this.mita_asioita_haluat_edistaa = mita;
 		this.ammatti = ammatti;
+		setAanestysnumero(aanestysnumero);
 		
 	}
 	
@@ -41,10 +45,9 @@ public class ehdokkaat {
 			this.ehdokas_id = Integer.parseInt(ehdokas_id);
 		}
 		catch(NumberFormatException | NullPointerException e) {
-			//Do nothing - the value of id won't be changed
 		}
 	}
-	
+
 	public String getSukunimi() {
 		return sukunimi;
 	}
@@ -84,7 +87,6 @@ public class ehdokkaat {
 			this.ika = Integer.parseInt(ika);
 		}
 		catch(NumberFormatException | NullPointerException e) {
-			//Do nothing - the value of ika won't be changed
 		}
 	}
 	public String getMiksi_eduskuntaan() {
@@ -106,5 +108,19 @@ public class ehdokkaat {
 	}
 	public void setAmmatti(String ammatti) {
 		this.ammatti = ammatti;
+	}
+	public int getAanestysnumero() {
+		return aanestysnumero;
+	}
+	
+	public void setAanestysnumero(int aanestysnumero) {
+		this.aanestysnumero = aanestysnumero;
+	}
+	public void setAanestysnumero(String aanestysnumero) {
+		try {
+			this.aanestysnumero = Integer.parseInt(aanestysnumero);
+		}
+		catch(NumberFormatException | NullPointerException e) {
+		}
 	}
 }

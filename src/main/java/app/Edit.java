@@ -71,10 +71,11 @@ public class Edit extends HttpServlet {
 		ehdokkaat E=new ehdokkaat(ehdokas_id, etunimi, sukunimi, puolue, kotipaikkakunta, ika, miksi_eduskuntaan,
 				mita_asioita_haluat_edistaa, ammatti, aanestysnumero);
 		
-			
+		dao.updateEhdokkaat(E);
+		
 			ArrayList<ehdokkaat> list=null;
 			if (dao.getConnection()) {
-				list=dao.updateEhdokkaat(E);
+				list=dao.readAllEhdokkaat();
 			}
 			
 			request.setAttribute("EhdokasLista", list);
