@@ -14,7 +14,7 @@
   <h1>${ehdokas.etunimi} ${ehdokas.sukunimi} &nbsp;N:o ${ehdokas.aanestysnumero}</h1>
   
   <a href='/Delete?aanestysnumero=${ehdokas.aanestysnumero}'>Poista ehdokas</a>
-  <a href='/Edit?aanestysnumero=${ehdokas.aanestysnumero}'>Päivitä ehdokas</a>
+  <a href='/readtoupdate?aanestysnumero=${ehdokas.aanestysnumero}'>Päivitä ehdokas</a>
   
 </div>
 </c:forEach>

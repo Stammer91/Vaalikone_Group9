@@ -10,12 +10,12 @@
 <%@ include file="../header.html" %>
 
 <!DOCTYPE html>
-<html>
+
 <head>
 <meta charset="UTF-8">
 <title>Muokkaa ehdokkaita</title>
 </head>
-<body>
+
 <h2>Muokkaa ehdokkaita</h2>
 <form action='Edit' method='post'>
 <label for="ehdokas_id">ID</label> <br>
@@ -52,7 +52,6 @@
 <input type="text" id="aanestysnumero" name="aanestysnumero"> <br><br>
 <input type="submit" value="Tallenna">
 </form>
-</body>
-</html>
+
 
 <%@ include file="../footer.html" %>

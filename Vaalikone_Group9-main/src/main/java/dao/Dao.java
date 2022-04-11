@@ -93,7 +93,7 @@ public class Dao {
 	}
 	
 	public ArrayList<ehdokkaat> updateEhdokkaat(ehdokkaat E) {
-		String sql = "update ehdokkaat set (etunimi=?, sukunimi?, puolue=?, kotipaikkakunta?, ika=?, miksi_eduskuntaan=?, mita_asioita_haluat_edistaa=?, ammatti=?) where ehdokas_id=?";
+		String sql = "update ehdokkaat set etunimi=?, sukunimi?, puolue=?, kotipaikkakunta?, ika=?, miksi_eduskuntaan=?, mita_asioita_haluat_edistaa=?, ammatti=? where ehdokas_id=?";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, E.getEhdokas_Id());

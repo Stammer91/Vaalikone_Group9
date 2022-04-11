@@ -77,6 +77,9 @@ public class Edit extends HttpServlet {
 			if (dao.getConnection()) {
 				list=dao.readAllEhdokkaat();
 			}
+			else {
+				System.out.println("No connection to database");
+			}
 			
 			request.setAttribute("EhdokasLista", list);
 			RequestDispatcher rd=request.getRequestDispatcher("/jsp/ShowEhdokkaat.jsp");
