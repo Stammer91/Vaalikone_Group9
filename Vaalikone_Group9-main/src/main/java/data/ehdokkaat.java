@@ -13,6 +13,7 @@ public class ehdokkaat {
 	private String ammatti;
 	private int aanestysnumero;
 	
+	//This is a comment
 
 	public ehdokkaat() {
 		
