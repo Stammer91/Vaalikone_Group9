@@ -1,25 +1,15 @@
 package app;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< Updated upstream:Vaalikone_Group9-main/src/main/java/app/Edit.java
-/**
- * Servlet implementation class Edit
- */
-@WebServlet("/Edit")
-public class Edit extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Edit() {
-=======
 import dao.Dao;
 import data.ehdokkaat;
 
@@ -38,33 +28,20 @@ public class Update extends HttpServlet {
 		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Johannes1998");
 	}
     public Update() {
->>>>>>> Stashed changes:Vaalikone_Group9-main/src/main/java/app/Update.java
         super();
-        // TODO Auto-generated constructor stub
     }
 
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-<<<<<<< Updated upstream:Vaalikone_Group9-main/src/main/java/app/Edit.java
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-=======
 		
-		response.sendRedirect("index.html");
->>>>>>> Stashed changes:Vaalikone_Group9-main/src/main/java/app/Update.java
+		response.sendRedirect("admin.html");
 	}
+	
 
-<<<<<<< Updated upstream:Vaalikone_Group9-main/src/main/java/app/Edit.java
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-=======
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 		     throws IOException, ServletException {
+		
 		String ehdokasid_string = request.getParameter("ehdokas_id");
 		String etunimi = request.getParameter("etunimi");
 		String sukunimi = request.getParameter("sukunimi");
@@ -95,7 +72,6 @@ public class Update extends HttpServlet {
 			request.setAttribute("EhdokasLista", list);
 			RequestDispatcher rd=request.getRequestDispatcher("/jsp/AdminShowEhdokkaat.jsp");
 			rd.forward(request, response);
->>>>>>> Stashed changes:Vaalikone_Group9-main/src/main/java/app/Update.java
 	}
 
 }

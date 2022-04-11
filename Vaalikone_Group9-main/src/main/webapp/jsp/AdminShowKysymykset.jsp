@@ -9,19 +9,15 @@
 
 <%@ include file="../header.html" %>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<c:forEach var="kysymys" items="${requestScope.KysymysLista}">
+<div class="card">
+  
+  <b>${kysymys.id}</b>
+  <p>${kysymys.kysymys}</p>
+  <a href='/readtoupdatekysymys?kysymys_id=${kysymys.id}'>Muokkaa kysymystä</a>
+  <a href='/DeleteKysymys?kysymys_id=${kysymys.id}'>Poista kysymys</a>
+  
+</div>
+</c:forEach>
 
 <%@ include file="../footer.html" %>

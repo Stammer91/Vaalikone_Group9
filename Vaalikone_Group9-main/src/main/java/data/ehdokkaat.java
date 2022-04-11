@@ -13,10 +13,6 @@ public class ehdokkaat {
 	private String ammatti;
 	private int aanestysnumero;
 	
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 
 	public ehdokkaat() {
 		

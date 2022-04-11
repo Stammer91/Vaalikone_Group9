@@ -66,12 +66,7 @@ public class Dao {
 			return null;
 		}
 	}
-<<<<<<< Updated upstream
-	
-	public ArrayList<ehdokkaat> addCandidate(ehdokkaat E) {
-=======
 	public ArrayList<ehdokkaat> addEhdokkaat(ehdokkaat E) {
->>>>>>> Stashed changes
 		String sql = "INSERT INTO ehdokkaat (ehdokas_id, sukunimi, etunimi, puolue, kotipaikkakunta, ika, miksi_eduskuntaan, mita_asioita_haluat_edistaa, ammatti, aanestysnumero) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -95,13 +90,7 @@ public class Dao {
 	}
 	public ArrayList<ehdokkaat> updateEhdokkaat(ehdokkaat E) {
 		try {
-<<<<<<< Updated upstream
-			String sql="update ehdokkaat set etunimi=? where id=?";
-			PreparedStatement pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, E.getEtunimi());
-			pstmt.setInt(2, E.getEhdokas_Id());
-=======
-			String sql="update ehdokkaat set etunimi=?, sukunimi=?, puolue=?, kotipaikkakunta=?, ika=?, miksi_eduskuntaan=?, mita_asioita_haluat_edistaa=?, ammatti=?, aanestysnumero=?  where id=?";
+			String sql="update ehdokkaat set etunimi=?, sukunimi=?, puolue=?, kotipaikkakunta=?, ika=?, miksi_eduskuntaan=?, mita_asioita_haluat_edistaa=?, ammatti=?, aanestysnumero=?  where ehdokas_id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, E.getEtunimi());
 			pstmt.setString(2, E.getSukunimi());
@@ -112,7 +101,7 @@ public class Dao {
 			pstmt.setString(7, E.getMita_asioita_haluat_edistaa());
 			pstmt.setString(8, E.getAmmatti());
 			pstmt.setInt(9, E.getAanestysnumero());
->>>>>>> Stashed changes
+			pstmt.setInt(10, E.getEhdokas_Id());
 			pstmt.executeUpdate();
 			return readAllEhdokkaat();
 		}
@@ -171,6 +160,37 @@ public class Dao {
 				list.add(kysymys);
 			}
 			return list;
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+	public ArrayList<kysymykset> updateKysymykset(kysymykset K) {
+		try {
+			String sql="update kysymykset set kysymys=?, where kysymys_id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, K.getKysymys());
+			pstmt.setInt(2, K.getId());
+			pstmt.executeUpdate();
+			return readAllKysymykset();
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+	public kysymykset readKysymys(String id) {
+		kysymykset kysymys=null;
+		try {
+			String sql="select * from kysymykset where kysymys_id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			ResultSet RS=pstmt.executeQuery();
+			while (RS.next()){
+				kysymys=new kysymykset();
+				kysymys.setId(RS.getInt("kysymys_id"));
+				kysymys.setKysymys(RS.getString("kysymys"));
+			}
+			return kysymys;
 		}
 		catch(SQLException e) {
 			return null;
