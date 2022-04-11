@@ -13,16 +13,18 @@ public class ehdokkaat {
 	private String ammatti;
 	private int aanestysnumero;
 	
-	//This is a comment
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
 	public ehdokkaat() {
 		
 	}
 	
-	public ehdokkaat(int id, String sukunimi, String etunimi, String puolue, String kunta, int ika, String miksi, String mita, String ammatti, int aanestysnumero) {
+	public ehdokkaat(int ehdokas_id, String sukunimi, String etunimi, String puolue, String kunta, int ika, String miksi, String mita, String ammatti, int aanestysnumero) {
 		
-		setEhdokas_Id(id);
+		setEhdokas_Id(ehdokas_id);
 		this.sukunimi = sukunimi;
 		this.etunimi = etunimi;
 		this.puolue = puolue;
@@ -113,7 +115,7 @@ public class ehdokkaat {
 	public int getAanestysnumero() {
 		return aanestysnumero;
 	}
-	
+
 	public void setAanestysnumero(int aanestysnumero) {
 		this.aanestysnumero = aanestysnumero;
 	}

@@ -13,6 +13,7 @@
 <div class="card">
   <h1>${ehdokas.etunimi} ${ehdokas.sukunimi} &nbsp;N:o ${ehdokas.aanestysnumero}</h1>
   
+  <a href='/readtoupdate?aanestysnumero=${ehdokas.aanestysnumero}'>Muokkaa ehdokkaan tietoja</a>
   <a href='/Delete?aanestysnumero=${ehdokas.aanestysnumero}'>Poista ehdokas</a>
 </div>
 </c:forEach>

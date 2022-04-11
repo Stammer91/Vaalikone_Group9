@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
 import data.ehdokkaat;
 import data.kysymykset;
 
@@ -42,7 +41,6 @@ public class Dao {
 			return false;
 		}
 	}
-	
 	public ArrayList<ehdokkaat> readAllEhdokkaat() {
 		ArrayList<ehdokkaat> list=new ArrayList<>();
 		try {
@@ -68,8 +66,12 @@ public class Dao {
 			return null;
 		}
 	}
+<<<<<<< Updated upstream
 	
+	public ArrayList<ehdokkaat> addCandidate(ehdokkaat E) {
+=======
 	public ArrayList<ehdokkaat> addEhdokkaat(ehdokkaat E) {
+>>>>>>> Stashed changes
 		String sql = "INSERT INTO ehdokkaat (ehdokas_id, sukunimi, etunimi, puolue, kotipaikkakunta, ika, miksi_eduskuntaan, mita_asioita_haluat_edistaa, ammatti, aanestysnumero) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -91,21 +93,26 @@ public class Dao {
 			return null;
 		}
 	}
-	
 	public ArrayList<ehdokkaat> updateEhdokkaat(ehdokkaat E) {
-		String sql = "update ehdokkaat set etunimi=?, sukunimi?, puolue=?, kotipaikkakunta?, ika=?, miksi_eduskuntaan=?, mita_asioita_haluat_edistaa=?, ammatti=? where ehdokas_id=?";
 		try {
+<<<<<<< Updated upstream
+			String sql="update ehdokkaat set etunimi=? where id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, E.getEhdokas_Id());
-			pstmt.setString(2, E.getEtunimi());
-			pstmt.setString(3, E.getSukunimi());
-			pstmt.setString(4, E.getPuolue());
-			pstmt.setString(5, E.getKotipaikkakunta());
-			pstmt.setInt(6, E.getIka());
-			pstmt.setString(7, E.getMiksi_eduskuntaan());
-			pstmt.setString(8, E.getMita_asioita_haluat_edistaa());
-			pstmt.setString(9, E.getAmmatti());
-			pstmt.setInt(10, E.getAanestysnumero());
+			pstmt.setString(1, E.getEtunimi());
+			pstmt.setInt(2, E.getEhdokas_Id());
+=======
+			String sql="update ehdokkaat set etunimi=?, sukunimi=?, puolue=?, kotipaikkakunta=?, ika=?, miksi_eduskuntaan=?, mita_asioita_haluat_edistaa=?, ammatti=?, aanestysnumero=?  where id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, E.getEtunimi());
+			pstmt.setString(2, E.getSukunimi());
+			pstmt.setString(3, E.getPuolue());
+			pstmt.setString(4, E.getKotipaikkakunta());
+			pstmt.setInt(5, E.getIka());
+			pstmt.setString(6, E.getMiksi_eduskuntaan());
+			pstmt.setString(7, E.getMita_asioita_haluat_edistaa());
+			pstmt.setString(8, E.getAmmatti());
+			pstmt.setInt(9, E.getAanestysnumero());
+>>>>>>> Stashed changes
 			pstmt.executeUpdate();
 			return readAllEhdokkaat();
 		}
@@ -129,7 +136,7 @@ public class Dao {
 	public ehdokkaat readEhdokas(String id) {
 		ehdokkaat ehdokas=null;
 		try {
-			String sql="select * from ehdokkaat where id=?";
+			String sql="select * from ehdokkaat where aanestysnumero=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet RS=pstmt.executeQuery();
@@ -170,4 +177,3 @@ public class Dao {
 		}
 	}
 }
-
