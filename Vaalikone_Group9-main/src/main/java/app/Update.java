@@ -34,13 +34,14 @@ public class Update extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.sendRedirect("index.html");
+		response.sendRedirect("admin.html");
 	}
 	
 
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 		     throws IOException, ServletException {
+		
 		String ehdokasid_string = request.getParameter("ehdokas_id");
 		String etunimi = request.getParameter("etunimi");
 		String sukunimi = request.getParameter("sukunimi");
