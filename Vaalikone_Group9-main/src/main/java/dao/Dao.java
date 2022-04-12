@@ -195,5 +195,18 @@ public class Dao {
 		catch(SQLException e) {
 			return null;
 		}
+	public ArrayList<kysymykset> addKysymys(kysymykset K) {
+		String sql = "INSERT INTO kysymykset (kysymys_id, kysymys) VALUES (?,?)";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, K.getId());
+			pstmt.setString(2, K.getKysymys());
+			pstmt.executeUpdate();
+			return readAllKysymykset();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
