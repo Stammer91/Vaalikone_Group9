@@ -31,7 +31,6 @@ public class AddKysymykset extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("AddKysymykset.jsp");
 	
 	
 		ArrayList<kysymykset> list = null;
