@@ -208,5 +208,18 @@ public class Dao {
 			e.printStackTrace();
 			return null;
 		}
+	
+	}
+			public ArrayList<kysymykset> deleteKysymys(String kysymys_id) {
+		try {
+			String sql="delete from kysymykset where kysymys_id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, kysymys_id);
+			pstmt.executeUpdate();
+			return readAllKysymykset();
+		}
+		catch(SQLException e) {
+			return null;
+		}
 	}
 }
