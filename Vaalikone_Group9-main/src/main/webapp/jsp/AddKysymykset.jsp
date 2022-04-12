@@ -12,9 +12,9 @@
 
 <form method="post" action="AddKysymykset">
 <label for="kysymys_id">Kysymyksen numero</label> <br>
-<input type="text" id="kysymys_id" name="kysymys_id"> <br><br>
+<input type="text" name="kysymys_id"> <br><br>
 <label for="etunimi">Kysymys</label> <br>
-<input type="text" id="kysymys" name="kysymys"> <br><br>
+<input type="text" name="kysymys"> <br><br>
 
 <input type="submit" value="Tallenna">
 </form>

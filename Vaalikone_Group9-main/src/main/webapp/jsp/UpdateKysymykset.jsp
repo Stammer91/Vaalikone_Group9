@@ -18,8 +18,8 @@
 <h2>Muokkaa kysymystä</h2>
 <form action='updatekysymys' method='post'>
 
-<label for="kysymys_id"></label> <br>
-<input type="text" name="kysymys_id"> <br><br>
+<label for="id">ID</label> <br>
+<input type="text" name="id" value="${requestScope.kysymys.id}" readonly> <br><br>
 
 <label for="kysymys">Kysymys</label> <br>
 <input type="text" name="kysymys" value="${requestScope.kysymys.kysymys}"> <br><br>

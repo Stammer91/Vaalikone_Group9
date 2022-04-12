@@ -167,7 +167,7 @@ public class Dao {
 	}
 	public ArrayList<kysymykset> updateKysymykset(kysymykset K) {
 		try {
-			String sql="update kysymykset set kysymys=?, where kysymys_id=?";
+			String sql="update kysymykset set kysymys=? where kysymys_id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, K.getKysymys());
 			pstmt.setInt(2, K.getId());
@@ -195,6 +195,7 @@ public class Dao {
 		catch(SQLException e) {
 			return null;
 		}
+	}
 	public ArrayList<kysymykset> addKysymys(kysymykset K) {
 		String sql = "INSERT INTO kysymykset (kysymys_id, kysymys) VALUES (?,?)";
 		try {
@@ -210,7 +211,7 @@ public class Dao {
 		}
 	
 	}
-			public ArrayList<kysymykset> deleteKysymys(String kysymys_id) {
+	public ArrayList<kysymykset> deleteKysymys(String kysymys_id) {
 		try {
 			String sql="delete from kysymykset where kysymys_id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);

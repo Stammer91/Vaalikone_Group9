@@ -75,7 +75,7 @@ public class Add extends HttpServlet {
 		
 		request.setAttribute("EhdokasLista", list);
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/AddEhdokkaat.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/AdminShowEhdokkaat.jsp");
 		rd.forward(request, response);
 	}
 

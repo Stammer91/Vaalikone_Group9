@@ -8,7 +8,7 @@ public class kysymykset {
 		
 	}
 	
-	public kysymykset(String id, String kysymys) {
+	public kysymykset(int id, String kysymys) {
 		
 		setId(id);
 		this.kysymys=kysymys;

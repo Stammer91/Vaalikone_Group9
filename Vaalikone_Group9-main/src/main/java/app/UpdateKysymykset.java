@@ -42,8 +42,10 @@ public class UpdateKysymykset extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 		     throws IOException, ServletException {
 		
-		String id = request.getParameter("kysymys_id");
+		String id_string = request.getParameter("id");
 		String kysymys = request.getParameter("kysymys");
+		
+		int id = Integer.parseInt(id_string);
 		
 		kysymykset K=new kysymykset(id, kysymys);
 		

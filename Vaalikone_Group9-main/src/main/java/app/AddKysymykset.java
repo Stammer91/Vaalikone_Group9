@@ -48,10 +48,12 @@ public class AddKysymykset extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String kysymys_id_string = request.getParameter("kysymys_id");
+		String kysymys_id = request.getParameter("kysymys_id");
 		String kysymys = request.getParameter("kysymys");
 		
-		kysymykset K=new kysymykset();
+		int id = Integer.parseInt(kysymys_id);
+		
+		kysymykset K=new kysymykset(id, kysymys);
 		
 		dao.addKysymys(K);
 		
@@ -64,7 +66,7 @@ public class AddKysymykset extends HttpServlet {
 		
 		request.setAttribute("KysymysLista", list);
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/AddKysymykset.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/AdminShowKysymykset.jsp");
 		rd.forward(request, response);
 	}
 

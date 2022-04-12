@@ -26,7 +26,7 @@ public class Delete extends HttpServlet{
 	
 	@Override
 	public void init() {
-		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "salasana");
+		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Johannes1998");
 	}
        
     public Delete() {
@@ -41,7 +41,7 @@ public void doGet(HttpServletRequest request, HttpServletResponse response)
 			list=dao.deleteEhdokkaat(id);
 	}
 		request.setAttribute("EhdokasLista", list);
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/ShowEhdokkaat.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/AdminShowEhdokkaat.jsp");
 		rd.forward(request, response);
 }
 
