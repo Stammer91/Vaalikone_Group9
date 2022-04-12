@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import data.ehdokkaat;
+import data.kysymykset;
 
 import java.sql.Connection;
 
@@ -65,12 +66,42 @@ public class Dao {
 			return null;
 		}
 	}
+	public ArrayList<ehdokkaat> addEhdokkaat(ehdokkaat E) {
+		String sql = "INSERT INTO ehdokkaat (ehdokas_id, sukunimi, etunimi, puolue, kotipaikkakunta, ika, miksi_eduskuntaan, mita_asioita_haluat_edistaa, ammatti, aanestysnumero) VALUES (?,?,?,?,?,?,?,?,?,?)";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, E.getEhdokas_Id());
+			pstmt.setString(2, E.getEtunimi());
+			pstmt.setString(3, E.getSukunimi());
+			pstmt.setString(4, E.getPuolue());
+			pstmt.setString(5, E.getKotipaikkakunta());
+			pstmt.setInt(6, E.getIka());
+			pstmt.setString(7, E.getMiksi_eduskuntaan());
+			pstmt.setString(8, E.getMita_asioita_haluat_edistaa());
+			pstmt.setString(9, E.getAmmatti());
+			pstmt.setInt(10, E.getAanestysnumero());
+			pstmt.executeUpdate();
+			return readAllEhdokkaat();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+	}
 	public ArrayList<ehdokkaat> updateEhdokkaat(ehdokkaat E) {
 		try {
-			String sql="update ehdokkaat set etunimi=? where id=?";
+			String sql="update ehdokkaat set etunimi=?, sukunimi=?, puolue=?, kotipaikkakunta=?, ika=?, miksi_eduskuntaan=?, mita_asioita_haluat_edistaa=?, ammatti=?, aanestysnumero=?  where ehdokas_id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, E.getEtunimi());
-			pstmt.setInt(2, E.getEhdokas_Id());
+			pstmt.setString(2, E.getSukunimi());
+			pstmt.setString(3, E.getPuolue());
+			pstmt.setString(4, E.getKotipaikkakunta());
+			pstmt.setInt(5, E.getIka());
+			pstmt.setString(6, E.getMiksi_eduskuntaan());
+			pstmt.setString(7, E.getMita_asioita_haluat_edistaa());
+			pstmt.setString(8, E.getAmmatti());
+			pstmt.setInt(9, E.getAanestysnumero());
+			pstmt.setInt(10, E.getEhdokas_Id());
 			pstmt.executeUpdate();
 			return readAllEhdokkaat();
 		}
@@ -94,7 +125,7 @@ public class Dao {
 	public ehdokkaat readEhdokas(String id) {
 		ehdokkaat ehdokas=null;
 		try {
-			String sql="select * from ehdokkaat where id=?";
+			String sql="select * from ehdokkaat where aanestysnumero=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet RS=pstmt.executeQuery();
@@ -114,6 +145,68 @@ public class Dao {
 			return ehdokas;
 		}
 		catch(SQLException e) {
+			return null;
+		}
+	}
+	public ArrayList<kysymykset> readAllKysymykset() {
+		ArrayList<kysymykset> list=new ArrayList<>();
+		try {
+			Statement stmt=conn.createStatement();
+			ResultSet RS=stmt.executeQuery("select * from kysymykset");
+			while (RS.next()){
+				kysymykset kysymys=new kysymykset();
+				kysymys.setId(RS.getInt("kysymys_id"));
+				kysymys.setKysymys(RS.getString("kysymys"));
+				list.add(kysymys);
+			}
+			return list;
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+	public ArrayList<kysymykset> updateKysymykset(kysymykset K) {
+		try {
+			String sql="update kysymykset set kysymys=?, where kysymys_id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, K.getKysymys());
+			pstmt.setInt(2, K.getId());
+			pstmt.executeUpdate();
+			return readAllKysymykset();
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+	public kysymykset readKysymys(String id) {
+		kysymykset kysymys=null;
+		try {
+			String sql="select * from kysymykset where kysymys_id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			ResultSet RS=pstmt.executeQuery();
+			while (RS.next()){
+				kysymys=new kysymykset();
+				kysymys.setId(RS.getInt("kysymys_id"));
+				kysymys.setKysymys(RS.getString("kysymys"));
+			}
+			return kysymys;
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+	public ArrayList<kysymykset> addKysymys(kysymykset K) {
+		String sql = "INSERT INTO kysymykset (kysymys_id, kysymys) VALUES (?,?)";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, K.getId());
+			pstmt.setString(2, K.getKysymys());
+			pstmt.executeUpdate();
+			return readAllKysymykset();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
 			return null;
 		}
 	}

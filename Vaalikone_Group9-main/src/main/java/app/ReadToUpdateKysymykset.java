@@ -10,33 +10,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
-import data.ehdokkaat;
+import data.kysymykset;
 
 
-@WebServlet("/readtoupdate")
-public class ReadToUpdate extends HttpServlet {
+@WebServlet("/readtoupdatekysymys")
+public class ReadToUpdateKysymykset extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Dao dao;
 	public void init() {
 		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Johannes1998");
 	}
        
-    public ReadToUpdate() {
+    public ReadToUpdateKysymykset() {
         super();
         
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String id=request.getParameter("aanestysnumero");
+		String id=request.getParameter("kysymys_id");
 		
-		ehdokkaat ehdokas=null;
+		kysymykset kysymys=null;
 		if (dao.getConnection()) {
-			ehdokas=dao.readEhdokas(id);
+			kysymys=dao.readKysymys(id);
 		}
-		request.setAttribute("ehdokas", ehdokas);
+		request.setAttribute("kysymys", kysymys);
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/UpdateEhdokkaat.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/UpdateKysymykset.jsp");
 		rd.forward(request, response);
 	}
 }

@@ -24,7 +24,6 @@
   <p>${ehdokas.miksi_eduskuntaan}</p>
   <b><u>Mitä asioita haluat edistää?</u></b>
   <p>${ehdokas.mita_asioita_haluat_edistaa}</p>
-  <a href='/Delete?aanestysnumero=${ehdokas.aanestysnumero}'>Poista ehdokas</a>
 </div>
 </c:forEach>
 

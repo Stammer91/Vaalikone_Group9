@@ -1,6 +1,7 @@
 package app;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,33 +11,38 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
-import data.ehdokkaat;
+import data.kysymykset;
 
-
-@WebServlet("/readtoupdate")
-public class ReadToUpdate extends HttpServlet {
+@WebServlet("/AdminShowKysymykset")
+public class AdminShowKysymykset extends HttpServlet{
+	
 	private static final long serialVersionUID = 1L;
-	private Dao dao;
+	 Dao dao = null;
+	
+	@Override
 	public void init() {
-		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Johannes1998");
+		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Johannes1998");
 	}
        
-    public ReadToUpdate() {
+    public AdminShowKysymykset() {
         super();
-        
     }
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String id=request.getParameter("aanestysnumero");
-		
-		ehdokkaat ehdokas=null;
+		ArrayList<kysymykset> list=null;
 		if (dao.getConnection()) {
-			ehdokas=dao.readEhdokas(id);
+			list=dao.readAllKysymykset();
 		}
-		request.setAttribute("ehdokas", ehdokas);
+		else {
+			System.out.println("No connection to database");
+		}
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/UpdateEhdokkaat.jsp");
+	
+		request.setAttribute("KysymysLista", list);
+
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/AdminShowKysymykset.jsp");
 		rd.forward(request, response);
-	}
+		
+	}	
+
 }

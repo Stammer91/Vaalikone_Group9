@@ -21,7 +21,7 @@ public class Add extends HttpServlet {
 	private Dao dao = null;
 	
 	public void init() {
-		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "salasana");
+		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Johannes1998");
 	}
        
     public Add() {
@@ -38,7 +38,7 @@ public class Add extends HttpServlet {
 			System.out.println("No connection to database");
 		}
 		
-		request.setAttribute("EhdokkaatLista", list);
+		request.setAttribute("EhdokasLista", list);
 		RequestDispatcher rd=request.getRequestDispatcher("/jsp/AddEhdokkaat.jsp");
 		rd.forward(request, response);
 	}
@@ -64,12 +64,17 @@ public class Add extends HttpServlet {
 		ehdokkaat E=new ehdokkaat(ehdokas_id, etunimi, sukunimi, puolue, kotipaikkakunta, ika, miksi_eduskuntaan,
 				mita_asioita_haluat_edistaa, ammatti, aanestysnumero);
 		
+		dao.addEhdokkaat(E);
+		
 		ArrayList<ehdokkaat> list=null;
 		if (dao.getConnection()) {
 			list=dao.readAllEhdokkaat();
+		} else {
+			System.out.println("No connection to database");
 		}
 		
-		request.setAttribute("EhdokkaatLista", list);
+		request.setAttribute("EhdokasLista", list);
+		
 		RequestDispatcher rd=request.getRequestDispatcher("/jsp/AddEhdokkaat.jsp");
 		rd.forward(request, response);
 	}
