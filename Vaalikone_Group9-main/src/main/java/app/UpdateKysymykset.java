@@ -23,6 +23,9 @@ public class UpdateKysymykset extends HttpServlet {
 
 	 private Dao dao;
 	
+	/**
+	 * Method to Dao class and connecting to the database using url, user and password
+	 */
 	@Override
 	public void init() {
 		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Johannes1998");
@@ -32,6 +35,9 @@ public class UpdateKysymykset extends HttpServlet {
     }
 
     
+	/**
+	 * Sens redirect link to response to get from admin.html
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		response.sendRedirect("admin.html");
@@ -39,6 +45,9 @@ public class UpdateKysymykset extends HttpServlet {
 	
 
 
+	/**
+	 * Gets question parameters from the jsp site, then updates them if edited and response sends updated list of questions to admin page
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 		     throws IOException, ServletException {
 		

@@ -19,6 +19,9 @@ public class ShowKysymykset extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	 Dao dao = null;
 	
+	/**
+	 * Method to Dao class and connecting to the database using url, user and password
+	 */
 	@Override
 	public void init() {
 		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Johannes1998");

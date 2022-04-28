@@ -21,6 +21,9 @@ public class AddKysymykset extends HttpServlet {
 	
 	private Dao dao = null;
 	
+	/**
+	 * Method to Dao class and connecting to the database using url, user and password
+	 */
 	public void init() {
 		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Johannes1998");
 	}

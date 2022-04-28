@@ -14,12 +14,21 @@ import dao.Dao;
 import data.ehdokkaat;
 
 
+/**
+ * Date: 14.4 2022
+ * This is a application for adding new canditates
+ * @author Oskari
+ *
+ */
 @WebServlet("/Add")
 public class Add extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private Dao dao = null;
 	
+	/**
+	 * Method to Dao class and connecting to the database using url, user and password
+	 */
 	public void init() {
 		dao = new Dao("jdbc:mysql://localhost:3306/vaalikone", "root", "Johannes1998");
 	}
@@ -29,6 +38,10 @@ public class Add extends HttpServlet {
     }
 
 	
+	/**
+	 * Method to create a list, checking from dao class the connection and reading all the canditate information.
+	 * Sending the list as a reguest to Adding new canditates jsp file
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<ehdokkaat> list = null;
@@ -44,6 +57,10 @@ public class Add extends HttpServlet {
 	}
 
 	
+	/**
+	 * Gets all the new canditates information from jsp site and adds the canditate to database
+	 * Request sends all the canditates to admin page
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String ehdokas_id_string = request.getParameter("ehdokas_id");
