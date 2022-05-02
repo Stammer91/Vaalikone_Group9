@@ -12,7 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import dao.Dao;
 import data.ehdokkaat;
 
-
+/**
+ * Date: 2.5 2022
+ * This is a application for reading the canditate and preparing for update
+ * @author Oskari
+ *
+ */
 @WebServlet("/readtoupdate")
 public class ReadToUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,7 +34,10 @@ public class ReadToUpdate extends HttpServlet {
         super();
         
     }
-
+    /**
+	 * Method to selecting the right canditate by the votingnumber, checking from dao class the connection and reading all the information of selected canditate.
+	 * Sending the canditate as a reguest to Admin page to update in jsp file.
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String id=request.getParameter("aanestysnumero");

@@ -12,7 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import dao.Dao;
 import data.kysymykset;
 
-
+/**
+ * Date: 2.5 2022
+ * This is a application for reading the question and preparing for update
+ * @author Oskari
+ *
+ */
 @WebServlet("/readtoupdatekysymys")
 public class ReadToUpdateKysymykset extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,8 +35,9 @@ public class ReadToUpdateKysymykset extends HttpServlet {
         
     }
 
-	/**
-	 * Reads the selecteds questions parameters and sends them in a response to jsp site
+    /**
+	 * Method to selecting the right question by the question_id, checking from dao class the connection and reading all the information of selected question.
+	 * Sending the question as a reguest to Admin page to update in jsp file.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

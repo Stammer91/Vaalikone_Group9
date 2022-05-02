@@ -14,9 +14,11 @@ import dao.Dao;
 import data.kysymykset;
 
  
-
 /**
- * Servlet implementation class Remove
+ * Date: 2.5 2022
+ * This is a application for deleting questions
+ * @author Oskari
+ *
  */
 @WebServlet("/DeleteKysymys")
 public class DeleteKysymys extends HttpServlet{
@@ -35,7 +37,10 @@ public class DeleteKysymys extends HttpServlet{
     public DeleteKysymys() {
         super();
     }
-
+    /**
+	 * Method to selecting the right questions by the question_id aswll creating a list, checking from dao class the connection and reading all the questions after delete.
+	 * Sending the list as a reguest to Admin page to show questions in jsp file.
+	 */
 public void doGet(HttpServletRequest request, HttpServletResponse response) 
 	     throws IOException, ServletException {
 		String id=request.getParameter("kysymys_id");
