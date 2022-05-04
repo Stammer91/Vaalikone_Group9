@@ -10,12 +10,20 @@ public class vastaukset implements Serializable {
 	
 	private int id;
 	
+	private String vastausSTR;
+	
 	private int vastaus;
 	
 	private ehdokkaat ehdokas;
 
 	private kysymykset kysymys;
-
+	
+	public vastaukset() {
+		
+	}
+	public vastaukset(String vastausSTR) {
+		this.vastausSTR=vastausSTR;
+	}
 	public int getId() {
 		return this.id;
 	}
