@@ -1,13 +1,17 @@
 package rest;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.io.IOException;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -30,10 +34,10 @@ public class VaalikoneService {
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("vaalikone");
 
 	@GET
-	@Path("/readvastaus")
+	@Path("/readvastaukset")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void readAnswers(@Context HttpServletRequest request, @Context HttpServletResponse response) {
+	public void readVastaukset(@Context HttpServletRequest request, @Context HttpServletResponse response) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		// TOSSA TOI SELECT VÄÄRIN @@@
