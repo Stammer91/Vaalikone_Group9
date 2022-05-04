@@ -26,13 +26,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import data.vastaukset;
+import data.ehdokkaatMTM;
+import data.kysymyksetMTM;
+import data.vastauksetMTM;
 
 @Path("/vaalikoneservice")
 public class VaalikoneService {
-
+	
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("vaalikone");
-
+	
 	@GET
 	@Path("/readvastaukset")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -40,8 +42,7 @@ public class VaalikoneService {
 	public void readVastaukset(@Context HttpServletRequest request, @Context HttpServletResponse response) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		// TOSSA TOI SELECT VÄÄRIN @@@
-		List<vastaukset> list = em.createQuery("select v from Vastaukset v").getResultList();
+		List<vastauksetMTM> list = em.createQuery("select v from Vastaukset v").getResultList();
 		em.getTransaction().commit();
 		em.close();
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/vastaukset.jsp");
@@ -54,88 +55,62 @@ public class VaalikoneService {
 		}
 	}
 	@GET
-	@Path("/readallVastaus")
+	@Path("/readvastaus")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void readAllVastaus(@Context HttpServletRequest request, @Context HttpServletResponse response) {
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		// TOSSA TOI SELECT VÄÄRIN @@@
-		List<vastaukset> list = em.createQuery("select f from Fish f").getResultList();
-		em.getTransaction().commit();
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/readallfish.jsp");
-		request.setAttribute("vastauslist", list);
-		try {
-			rd.forward(request, response);
-		} catch (ServletException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	@GET
-	@Path("/readVastaus")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<vastaukset> readVastaus() {
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		// TOSSA TOI SELECT VÄÄRIN @@@
-		List<vastaukset> list = em.createQuery("select f from Fish f").getResultList();
-		em.getTransaction().commit();
-		return list;
-	}
-
-	@POST
-	@Path("/addVastaus")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<vastaukset> addVastaus(vastaukset vastaus) {
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		em.persist(vastaus);// The actual insertion line
-		em.getTransaction().commit();
-		// Calling the method readFish() of this service
-		List<vastaukset> list = readVastaus();
-		return list;
-	}
-
-	@PUT
-	@Path("/updatefish")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<vastaukset> updateFish(vastaukset vastaus) {
+	public List<vastauksetMTM> readVastaus() {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		vastaukset f=em.find(vastaukset.class, vastaus.getId()); //select * from fish where id=fish.getId()
-		if (f!=null) {
-			em.merge(vastaus);//The actual update line
-		}
+		List<vastauksetMTM> list=em.createQuery("select v from Vastaukset v").getResultList();		
 		em.getTransaction().commit();
-		//Calling the method readFish() of this service
-		List<vastaukset> list=readVastaus();		
+		return list;
+	}	
+	
+	@POST
+	@Path("/addvastaus")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<vastauksetMTM> addVastaus(vastauksetMTM vastaus) {
+		EntityManager em=emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(vastaus);
+		em.getTransaction().commit();
+		List<vastauksetMTM> list=readVastaus();		
 		return list;
 	}
 	
-	@DELETE
-	@Path("/deleteVastaus/{id}")
+	@PUT
+	@Path("/updatevastaus")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public List<vastaukset> deleteVastaus(@PathParam("id") int id) {
+	public List<vastauksetMTM> updateVastaus(vastauksetMTM vastaus) {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		vastaukset f=em.find(vastaukset.class, id);
-		if (f!=null) {
-			em.remove(f);//The actual delete line
+		vastauksetMTM v=em.find(vastauksetMTM.class, vastaus.getId());
+		if (v!=null) {
+			em.merge(vastaus);
 		}
 		em.getTransaction().commit();
-		//Calling the method readFish() of this service
-		List<vastaukset> list=readVastaus();		
+		List<vastauksetMTM> list=readVastaus();		
 		return list;
-	}
+	}	
+	@DELETE
+	@Path("/deletevastaus/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<vastauksetMTM> deleteVastaus(@PathParam("id") int id) {
+		EntityManager em=emf.createEntityManager();
+		em.getTransaction().begin();
+		vastauksetMTM v=em.find(vastauksetMTM.class, id);
+		if (v!=null) {
+			em.remove(v);
+		}
+		em.getTransaction().commit();
+		List<vastauksetMTM> list=readVastaus();		
+		return list;
+	}	
 	@GET
-	@Path("/deleteVastaus/{id}")
+	@Path("/deletevastaus/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteVastausByGet(@PathParam("id") int id, 
@@ -144,33 +119,30 @@ public class VaalikoneService {
 			) {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		vastaukset f=em.find(vastaukset.class, id);
-		if (f!=null) {
-			em.remove(f);//The actual delete line
+		vastauksetMTM v=em.find(vastauksetMTM.class, id);
+		if (v!=null) {
+			em.remove(v);
 		}
 		em.getTransaction().commit();
-		//Calling the method readFish() of this service
-		List<vastaukset> list=readVastaus();		
+		List<vastauksetMTM> list=readVastaus();		
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/Vastausform.jsp");
-		request.setAttribute("vastauslist", list);
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/vastaukset.jsp");
+		request.setAttribute("VastauksetLista", list);
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-}
+	}	
 	@GET
-	@Path("/readtoupdateVastaus/{id}")
+	@Path("/readtoupdatevastaukset/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public vastaukset readToUpdateVastaus(@PathParam("id") int id) {
+	public vastauksetMTM readToUpdateVastaukset(@PathParam("id") int id) {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		vastaukset f=em.find(vastaukset.class, id);
+		vastauksetMTM v=em.find(vastauksetMTM.class, id);
 		em.getTransaction().commit();
-		return f;
+		return v;
 	}	
-	
 }
