@@ -49,11 +49,11 @@ public class VaalikoneService {
 	public void readVastaukset() {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		List<vastauksetMTM> list = em.createQuery("select v from Vastaukset v").getResultList();
+		List<vastauksetMTM> list = em.createQuery("select v from vastaukset v").getResultList();
 		em.getTransaction().commit();
 		em.close();
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/ShowVastaukset.jsp");
-		request.setAttribute("VastauksetLista", list);
+		request.setAttribute("VastausLista", list);
 		
 		try {
 			rd.forward(request, response);
@@ -68,7 +68,7 @@ public class VaalikoneService {
 	public List<vastauksetMTM> readVastaus() {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		List<vastauksetMTM> list=em.createQuery("select v from Vastaukset v").getResultList();		
+		List<vastauksetMTM> list=em.createQuery("select v from vastaukset v").getResultList();		
 		em.getTransaction().commit();
 		return list;
 	}	
@@ -134,7 +134,7 @@ public class VaalikoneService {
 		List<vastauksetMTM> list=readVastaus();		
 		
 		RequestDispatcher rd=request.getRequestDispatcher("/jsp/ShowVastaukset.jsp");
-		request.setAttribute("VastauksetLista", list);
+		request.setAttribute("VastausLista", list);
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException e) {
@@ -146,17 +146,17 @@ public class VaalikoneService {
 	@Path("/readall")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void readQuestions() {
+	public void readAll() {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		List<ehdokkaatMTM> list = em.createQuery("select e from ehdokkaat e").getResultList();
-		List<kysymyksetMTM> list2 = em.createQuery("select k from kysymykset k").getResultList();
-		List<vastauksetMTM> list3 = em.createQuery("select v from vastaukset v").getResultList();
+		List<ehdokkaatMTM> list = em.createQuery("select e from Ehdokas e").getResultList();
+		List<ehdokkaatMTM> list2 = em.createQuery("select k from Kysymys k").getResultList();
+		List<vastauksetMTM> list3 = em.createQuery("select v from Vastaus v").getResultList();
 		em.getTransaction().commit();
 		em.close();
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/ShowVastaukset.jsp");
-		request.setAttribute("KysymysLista", list);
-		request.setAttribute("EhdokasLista", list2);
+		request.setAttribute("EhdokasLista", list);
+		request.setAttribute("KysymysLista", list2);
 		request.setAttribute("VastausLista", list3);
 		try {
 			rd.forward(request, response);

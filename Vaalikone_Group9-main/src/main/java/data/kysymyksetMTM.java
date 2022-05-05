@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="kysymykset")
-@NamedQuery(name="Kysymys.findAll", query="SELECT k FROM kysymykset k")
+@NamedQuery(name="Kysymys.findAll", query="SELECT k FROM Kysymys k")
 public class kysymyksetMTM implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,6 @@ public class kysymyksetMTM implements Serializable {
 
 	private String kysymys;
 
-	//bi-directional many-to-one association to Answer
 	@OneToMany(mappedBy="kysymys")
 	private List<vastauksetMTM> vastaukset;
 	
