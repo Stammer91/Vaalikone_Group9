@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "ehdokkaat")
-@NamedQuery(name = "Ehdokkaat.findAll", query = "SELECT e FROM Ehdokkaat e")
+@NamedQuery(name = "ehdokkaatMTM.findAll", query = "SELECT e FROM ehdokkaatMTM e")
 public class ehdokkaatMTM implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -21,12 +21,10 @@ public class ehdokkaatMTM implements Serializable {
 	@Column(name = "AANESTYSNUMERO")
 	private int aanestysnumero;
 
-	private String info;
-
 	@Column(name = "Etunimi")
 	private String etunimi;
 
-	private String kunta;
+	private String kotipaikkakunta;
 
 	private String puolue;
 
@@ -35,23 +33,22 @@ public class ehdokkaatMTM implements Serializable {
 	private String sukunimi;
 
 	
-	@OneToMany(mappedBy = "ehdokkaat")
+	@OneToMany(mappedBy = "ehdokas")
 	private List<vastauksetMTM> vastaukset;
 
 	public ehdokkaatMTM() {
 	}
 
-	public ehdokkaatMTM(String id, String sukunimi, String etunimi, String aanestysnumero, String ika, String kunta,
-			String puolue, String ammatti, String info) {
+	public ehdokkaatMTM(String id, String sukunimi, String etunimi, String aanestysnumero, String ika, String kotipaikkakunta,
+			String puolue, String ammatti) {
 		setId(id);
 		this.sukunimi = sukunimi;
 		this.etunimi = etunimi;
 		setAanestysnumero(aanestysnumero);
 		setIka(ika);
-		this.kunta = kunta;
+		this.kotipaikkakunta = kotipaikkakunta;
 		this.puolue = puolue;
 		this.ammatti = ammatti;
-		this.info = info;
 	}
 
 	public int getEhdokas_Id() {
@@ -99,14 +96,7 @@ public class ehdokkaatMTM implements Serializable {
 
 		}
 	}
-	public String getInfo() {
-		return this.info;
-	}
-
-	public void setInfo(String info) {
-		this.info = info;
-	}
-
+	
 	public String getEtunimi() {
 		return this.etunimi;
 	}
@@ -115,12 +105,12 @@ public class ehdokkaatMTM implements Serializable {
 		this.etunimi = etunimi;
 	}
 
-	public String getKunta() {
-		return this.kunta;
+	public String getKotipaikkakunta() {
+		return this.kotipaikkakunta;
 	}
 
-	public void setKunta(String kunta) {
-		this.kunta = kunta;
+	public void setKotipaikkakunta(String kotipaikkakunta) {
+		this.kotipaikkakunta = kotipaikkakunta;
 	}
 
 	public String getPuolue() {
@@ -151,8 +141,8 @@ public class ehdokkaatMTM implements Serializable {
 		return this.vastaukset;
 	}
 
-	public void setVastaus(List<vastauksetMTM> vastaus) {
-		this.vastaukset = vastaus;
+	public void setVastaus(List<vastauksetMTM> vastaukset) {
+		this.vastaukset = vastaukset;
 	}
 
 	public vastauksetMTM addVastaus(vastauksetMTM vastaus) {

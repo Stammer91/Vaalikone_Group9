@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="vastaukset")
-@NamedQuery(name="Vastaukset.findAll", query="SELECT v FROM Vastaukset v")
+@NamedQuery(name="vastauksetMTM.findAll", query="SELECT v FROM vastauksetMTM v")
 public class vastauksetMTM implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -16,16 +16,16 @@ public class vastauksetMTM implements Serializable {
 	private int id;
 
 	
-	private int vastaukset;
+	private int vastaus;
 
 
 	@ManyToOne
 	@JoinColumn(name="EHDOKAS_ID")
-	private ehdokkaatMTM ehdokkaat;
+	private ehdokkaatMTM ehdokas;
 
 	@ManyToOne
 	@JoinColumn(name="KYSYMYS_ID")
-	private kysymyksetMTM kysymykset;
+	private kysymyksetMTM kysymys;
 
 	
 	public vastauksetMTM() {
@@ -41,31 +41,31 @@ public class vastauksetMTM implements Serializable {
 	}
 	
 	public int getVastaus() {
-		return this.vastaukset;
+		return this.vastaus;
 	}
 
 	public void setVastaus(int vastaus) {
-		this.vastaukset = vastaus;
+		this.vastaus = vastaus;
 	}
 	
 	public ehdokkaatMTM getEhdokas() {
-		return this.ehdokkaat;
+		return this.ehdokas;
 	}
 
-	public void setEhdokas(ehdokkaatMTM ehdokkaatMTM) {
-		this.ehdokkaat = ehdokkaatMTM;
+	public void setEhdokas(ehdokkaatMTM ehdokas) {
+		this.ehdokas = ehdokas;
 	}
 	
 	public kysymyksetMTM getKysymys() {
-		return this.kysymykset;
+		return this.kysymys;
 	}
 
-	public void setKysymys(kysymyksetMTM kysymyksetMTM) {
-		this.kysymykset = kysymyksetMTM;
+	public void setKysymys(kysymyksetMTM kysymys) {
+		this.kysymys = kysymys;
 	}
 	
 	public String toString() {
-		return "Vastaus: "+this.id+"/"+this.vastaukset;
+		return "Vastaus: "+this.id+"/"+this.vastaus;
 	}
 
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name="kysymykset")
-@NamedQuery(name="Kysymykset.findAll", query="SELECT k FROM Kysymykset k")
+@NamedQuery(name="kysymyksetMTM.findAll", query="SELECT k FROM kysymyksetMTM k")
 public class kysymyksetMTM implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,7 @@ public class kysymyksetMTM implements Serializable {
 
 	private String kysymys;
 
-	@OneToMany(mappedBy="kysymykset")
+	@OneToMany(mappedBy="kysymys")
 	private List<vastauksetMTM> vastaukset;
 	
 	public kysymyksetMTM() {
@@ -98,7 +98,7 @@ public class kysymyksetMTM implements Serializable {
 	}
 
 	public String toString() {
-		return "Ehdokas ID: "+this.id;
+		return "Kysymys: "+this.id;
 	}
 
 }

@@ -149,9 +149,9 @@ public class VaalikoneService {
 	public void readAll() {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		List<ehdokkaatMTM> list = em.createQuery("select e from Ehdokkaat e").getResultList();
-		List<ehdokkaatMTM> list2 = em.createQuery("select k from Kysymykset k").getResultList();
-		List<vastauksetMTM> list3 = em.createQuery("select v from Vastaukset v").getResultList();
+		List<ehdokkaatMTM> list = em.createQuery("select e from ehdokkaatMTM e").getResultList();
+		List<kysymyksetMTM> list2 = em.createQuery("select k from kysymyksetMTM k").getResultList();
+		List<vastauksetMTM> list3 = em.createQuery("select v from vastauksetMTM v").getResultList();
 		em.getTransaction().commit();
 		em.close();
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/ShowVastaukset.jsp");
