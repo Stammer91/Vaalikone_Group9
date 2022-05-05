@@ -5,13 +5,10 @@ import javax.persistence.*;
 import java.util.List;
 
 
-/**
- * The persistent class for the questions database table.
- * 
- */
+
 @Entity
 @Table(name="kysymykset")
-@NamedQuery(name="Kysymys.findAll", query="SELECT k FROM Kysymys k")
+@NamedQuery(name="Kysymykset.findAll", query="SELECT k FROM Kysymykset k")
 public class kysymyksetMTM implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +19,7 @@ public class kysymyksetMTM implements Serializable {
 
 	private String kysymys;
 
-	@OneToMany(mappedBy="kysymys")
+	@OneToMany(mappedBy="kysymykset")
 	private List<vastauksetMTM> vastaukset;
 	
 	public kysymyksetMTM() {

@@ -49,7 +49,7 @@ public class VaalikoneService {
 	public void readVastaukset() {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		List<vastauksetMTM> list = em.createQuery("select v from vastaukset v").getResultList();
+		List<vastauksetMTM> list = em.createQuery("select v from Vastaukset v").getResultList();
 		em.getTransaction().commit();
 		em.close();
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/ShowVastaukset.jsp");
@@ -68,7 +68,7 @@ public class VaalikoneService {
 	public List<vastauksetMTM> readVastaus() {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		List<vastauksetMTM> list=em.createQuery("select v from vastaukset v").getResultList();		
+		List<vastauksetMTM> list=em.createQuery("select v from Vastaukset v").getResultList();		
 		em.getTransaction().commit();
 		return list;
 	}	
@@ -149,9 +149,9 @@ public class VaalikoneService {
 	public void readAll() {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		List<ehdokkaatMTM> list = em.createQuery("select e from Ehdokas e").getResultList();
-		List<ehdokkaatMTM> list2 = em.createQuery("select k from Kysymys k").getResultList();
-		List<vastauksetMTM> list3 = em.createQuery("select v from Vastaus v").getResultList();
+		List<ehdokkaatMTM> list = em.createQuery("select e from Ehdokkaat e").getResultList();
+		List<ehdokkaatMTM> list2 = em.createQuery("select k from Kysymykset k").getResultList();
+		List<vastauksetMTM> list3 = em.createQuery("select v from Vastaukset v").getResultList();
 		em.getTransaction().commit();
 		em.close();
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/ShowVastaukset.jsp");

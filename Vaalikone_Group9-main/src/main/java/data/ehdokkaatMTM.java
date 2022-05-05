@@ -4,13 +4,10 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * The persistent class for the candidates database table.
- * 
- */
+
 @Entity
 @Table(name = "ehdokkaat")
-@NamedQuery(name = "Ehdokas.findAll", query = "SELECT e FROM Ehdokas e")
+@NamedQuery(name = "Ehdokkaat.findAll", query = "SELECT e FROM Ehdokkaat e")
 public class ehdokkaatMTM implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -37,9 +34,9 @@ public class ehdokkaatMTM implements Serializable {
 
 	private String sukunimi;
 
-	// bi-directional many-to-one association to Answer
-	@OneToMany(mappedBy = "ehdokas")
-	private List<vastauksetMTM> vastaus;
+	
+	@OneToMany(mappedBy = "ehdokkaat")
+	private List<vastauksetMTM> vastaukset;
 
 	public ehdokkaatMTM() {
 	}
@@ -151,11 +148,11 @@ public class ehdokkaatMTM implements Serializable {
 	}
 
 	public List<vastauksetMTM> getVastaus() {
-		return this.vastaus;
+		return this.vastaukset;
 	}
 
 	public void setVastaus(List<vastauksetMTM> vastaus) {
-		this.vastaus = vastaus;
+		this.vastaukset = vastaus;
 	}
 
 	public vastauksetMTM addVastaus(vastauksetMTM vastaus) {

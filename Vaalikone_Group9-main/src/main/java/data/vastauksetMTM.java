@@ -4,13 +4,10 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 
-/**
- * The persistent class for the answers database table.
- * 
- */
+
 @Entity
 @Table(name="vastaukset")
-@NamedQuery(name="Vastaus.findAll", query="SELECT v FROM Vastaus v")
+@NamedQuery(name="Vastaukset.findAll", query="SELECT v FROM Vastaukset v")
 public class vastauksetMTM implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -19,17 +16,16 @@ public class vastauksetMTM implements Serializable {
 	private int id;
 
 	
-	private int vastaus;
+	private int vastaukset;
 
-	//bi-directional many-to-one association to Candidate
+
 	@ManyToOne
 	@JoinColumn(name="EHDOKAS_ID")
-	private ehdokkaatMTM ehdokas;
+	private ehdokkaatMTM ehdokkaat;
 
-	//bi-directional many-to-one association to Question
 	@ManyToOne
 	@JoinColumn(name="KYSYMYS_ID")
-	private kysymyksetMTM kysymys;
+	private kysymyksetMTM kysymykset;
 
 	
 	public vastauksetMTM() {
@@ -45,31 +41,31 @@ public class vastauksetMTM implements Serializable {
 	}
 	
 	public int getVastaus() {
-		return this.vastaus;
+		return this.vastaukset;
 	}
 
 	public void setVastaus(int vastaus) {
-		this.vastaus = vastaus;
+		this.vastaukset = vastaus;
 	}
 	
 	public ehdokkaatMTM getEhdokas() {
-		return this.ehdokas;
+		return this.ehdokkaat;
 	}
 
 	public void setEhdokas(ehdokkaatMTM ehdokkaatMTM) {
-		this.ehdokas = ehdokkaatMTM;
+		this.ehdokkaat = ehdokkaatMTM;
 	}
 	
 	public kysymyksetMTM getKysymys() {
-		return this.kysymys;
+		return this.kysymykset;
 	}
 
 	public void setKysymys(kysymyksetMTM kysymyksetMTM) {
-		this.kysymys = kysymyksetMTM;
+		this.kysymykset = kysymyksetMTM;
 	}
 	
 	public String toString() {
-		return "Vastaus: "+this.id+"/"+this.vastaus;
+		return "Vastaus: "+this.id+"/"+this.vastaukset;
 	}
 
 }
