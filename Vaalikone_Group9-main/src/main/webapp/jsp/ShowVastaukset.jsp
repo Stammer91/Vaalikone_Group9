@@ -9,7 +9,7 @@
 
 <%@ include file="../header.html" %>
 
-<form action="/rest/VaalikoneService/addvastaus" method="post">
+<form action="/rest/vaalikoneservice/addvastaus" method="post">
 <c:forEach var="ehdokas" items="${requestScope.EhdokasLista}" >
 <option value="${ehdokas.aanestysnumero}">${ehdokas.sukunimi} ${ehdokas.etunimi}</option>
 </c:forEach>
@@ -35,11 +35,11 @@
 
 <ol>
 <c:forEach var="vastaus" items="${requestScope.VastausLista}" >
-<li><b>ID:</b>${vastaus.id}, "${vastaus.vastaus}" <a href='/rest/VaalikoneService/deleteanswer/${vastaus.id}'>Poista vastaus</a>
+<li><b>ID:</b>${vastaus.id}, "${vastaus.vastaus}" <a href='/rest/vaalikoneservice/deleteanswer/${vastaus.id}'>Poista vastaus</a>
 </c:forEach>
 </ol>
 
-<form action="/rest/VaalikoneService/sendvastaus" method="post">
+<form action="/rest/vaalikoneservice/sendvastaus" method="post">
 <c:forEach var="ehdokas" items="${requestScope.EhdokasLista}" >
 <option value="${ehdokas.aanestysnumero}">${ehdokas.sukunimi} ${ehokas.etunimi}</option>
 </c:forEach>

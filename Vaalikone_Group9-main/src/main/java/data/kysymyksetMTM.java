@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="kysymykset")
-@NamedQuery(name="Kysymys.findAll", query="SELECT k FROM Kysymys k")
+@NamedQuery(name="Kysymys.findAll", query="SELECT k FROM kysymykset k")
 public class kysymyksetMTM implements Serializable {
 	private static final long serialVersionUID = 1L;
 

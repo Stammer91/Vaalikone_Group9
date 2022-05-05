@@ -143,14 +143,14 @@ public class VaalikoneService {
 	}
 	
 	@GET
-	@Path("/readAll")
+	@Path("/readall")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void readQuestions() {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		List<kysymyksetMTM> list = em.createQuery("select k from kysymykset k").getResultList();
-		List<ehdokkaatMTM> list2 = em.createQuery("select e from ehdokkaat e").getResultList();
+		List<ehdokkaatMTM> list = em.createQuery("select e from ehdokkaat e").getResultList();
+		List<kysymyksetMTM> list2 = em.createQuery("select k from kysymykset k").getResultList();
 		List<vastauksetMTM> list3 = em.createQuery("select v from vastaukset v").getResultList();
 		em.getTransaction().commit();
 		em.close();
