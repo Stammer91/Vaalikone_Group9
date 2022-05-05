@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 
 import data.vastauksetMTM;
 
-@WebServlet(urlPatterns = {"/addVastaus", "/deleteVastaus/{id}","/updateVastaus","/readVastaus","/readtoupdateVastaus/{id}", "/readallVastaus"})
+@WebServlet(urlPatterns = {"/addVastaus", "/deleteVastaus/{id}","/updateVastaus","/readVastaus", "/readallVastaus"})
 public class HandleVastaukset extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -73,7 +73,7 @@ public class HandleVastaukset extends HttpServlet {
 
 	private List<vastauksetMTM> addVastaus(HttpServletRequest request) {
 		//A Fish object to send to our web-service 
-		vastauksetMTM f=new vastauksetMTM(request.getParameter("vastausSTR"));
+		vastauksetMTM f=new vastauksetMTM();
 		System.out.println(f);
 		String uri = "http://127.0.0.1:8080/rest/VaalikoneService/addVastaus";
 		Client c=ClientBuilder.newClient();
@@ -106,7 +106,7 @@ public class HandleVastaukset extends HttpServlet {
 	
 	private List<vastauksetMTM> updateVastaus(HttpServletRequest request) {
 		//A Fish object to send to our web-service 
-		vastauksetMTM f=new vastauksetMTM(request.getParameter("id"), request.getParameter("vastausSTR"));
+		vastauksetMTM f=new vastauksetMTM();
 		System.out.println(f);
 		String uri = "http://127.0.0.1:8080/rest/VaalikoneService/updateVastaus";
 		Client c=ClientBuilder.newClient();

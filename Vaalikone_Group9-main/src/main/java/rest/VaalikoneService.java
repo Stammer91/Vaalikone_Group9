@@ -3,7 +3,7 @@ package rest;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
-
+import java.sql.SQLException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,7 +25,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 
+import dao.Dao;
 import data.ehdokkaatMTM;
 import data.kysymyksetMTM;
 import data.vastauksetMTM;
@@ -33,19 +35,24 @@ import data.vastauksetMTM;
 @Path("/vaalikoneservice")
 public class VaalikoneService {
 	
+	private Dao dao = new Dao("jdbc:mysql://localhost:3306/vaalikone?useSSL=false", "root", "Johannes1998");
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("vaalikone");
+	
+	@Context HttpServletRequest request;
+	@Context HttpServletResponse response;
+	
 	
 	@GET
 	@Path("/readvastaukset")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void readVastaukset(@Context HttpServletRequest request, @Context HttpServletResponse response) {
+	public void readVastaukset() {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		List<vastauksetMTM> list = em.createQuery("select v from Vastaukset v").getResultList();
 		em.getTransaction().commit();
 		em.close();
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/vastaukset.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/ShowVastaukset.jsp");
 		request.setAttribute("VastauksetLista", list);
 		
 		try {
@@ -126,23 +133,35 @@ public class VaalikoneService {
 		em.getTransaction().commit();
 		List<vastauksetMTM> list=readVastaus();		
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/vastaukset.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/ShowVastaukset.jsp");
 		request.setAttribute("VastauksetLista", list);
 		try {
 			rd.forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
 		}
-	}	
+	}
+	
 	@GET
-	@Path("/readtoupdatevastaukset/{id}")
+	@Path("/readAll")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public vastauksetMTM readToUpdateVastaukset(@PathParam("id") int id) {
-		EntityManager em=emf.createEntityManager();
+	public void readQuestions() {
+		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		vastauksetMTM v=em.find(vastauksetMTM.class, id);
+		List<kysymyksetMTM> list = em.createQuery("select k from kysymykset k").getResultList();
+		List<ehdokkaatMTM> list2 = em.createQuery("select e from ehdokkaat e").getResultList();
+		List<vastauksetMTM> list3 = em.createQuery("select v from vastaukset v").getResultList();
 		em.getTransaction().commit();
-		return v;
-	}	
+		em.close();
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/ShowVastaukset.jsp");
+		request.setAttribute("KysymysLista", list);
+		request.setAttribute("EhdokasLista", list2);
+		request.setAttribute("VastausLista", list3);
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
