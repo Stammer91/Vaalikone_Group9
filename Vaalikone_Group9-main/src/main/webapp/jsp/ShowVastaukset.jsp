@@ -20,15 +20,15 @@
 <c:forEach var="kysymys" items="${requestScope.KysymysLista}" >
 <b>${kysymys.id} "${kysymys.kysymys}"</b><br>
 <table>
-<input type="radio" id="r1" name="valinta1${kysymys.id}" value="1">
+<input type="radio" id="r1" name="valinta${kysymys.id}" value="1">
 <label for="r1">Täysin eri mieltä</label>
-<input type="radio" id="r2" name="valinta2${kysymys.id}" value="2">
+<input type="radio" id="r2" name="valinta${kysymys.id}" value="2">
 <label for="r2">Jokseenkin eri mieltä</label>
-<input type="radio" id="r3" name="valinta3${kysymys.id}" value="3">
+<input type="radio" id="r3" name="valinta${kysymys.id}" value="3">
 <label for="r3">Ei samaa tai eri mieltä</label>
-<input type="radio" id="r4" name="valinta4${kysymys.id}" value="4">
+<input type="radio" id="r4" name="valinta${kysymys.id}" value="4">
 <label for="r4">Jokseenkin samaa mieltä</label>
-<input type="radio" id="r5" name="valinta5${kysymys.id}" value="5">
+<input type="radio" id="r5" name="valinta${kysymys.id}" value="5">
 <label for="r5">Täysin samaa mieltä</label>
 </table>
 <br>
@@ -39,7 +39,7 @@
 
 <br><br>
 <c:forEach var="vastaus" items="${requestScope.VastausLista}" >
-<b>ID:</b>${vastaus.id}, "${vastaus.vastaus}" <a href='/rest/vaalikoneservice/deleteanswer/${vastaus.id}'>Poista vastaus<br><br></a>
+<b>${vastaus.id}</b>: <b>${vastaus.ehdokas}</b>, <b>Vastaus:</b>"${vastaus.vastaus}" <a href='/rest/vaalikoneservice/deletevastaus/${vastaus.id}'>Poista vastaus<br><br></a>
 </c:forEach>
 
 

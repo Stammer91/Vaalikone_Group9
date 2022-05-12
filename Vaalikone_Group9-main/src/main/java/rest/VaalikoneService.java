@@ -75,16 +75,35 @@ public class VaalikoneService {
 	
 	@POST
 	@Path("/addvastaus")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<vastauksetMTM> addVastaus(vastauksetMTM vastaus) {
-		EntityManager em=emf.createEntityManager();
-		em.getTransaction().begin();
-		em.persist(vastaus);
-		em.getTransaction().commit();
-		List<vastauksetMTM> list=readVastaus();		
-		return list;
+	@Consumes("application/x-www-form-urlencoded")
+	public void addvastaus(MultivaluedMap<String, String> formParams) throws SQLException {
+
+		String Ehdokas_Id = formParams.getFirst("ehdokasvalinta");
+
+		ehdokkaatMTM ehdokas = new ehdokkaatMTM();
+		ehdokas.setId(Ehdokas_Id);
+		int intEhdokas_Id = Integer.parseInt(Ehdokas_Id);
+		kysymyksetMTM kysymys = new kysymyksetMTM();
+		for (String key : formParams.keySet()) {
+			if (key.startsWith("valinta")) {
+
+				String VastausValue = formParams.getFirst(key);
+				int VastausValInt = Integer.parseInt(VastausValue);
+				String Kysymys_Id = key.substring(7);
+				vastauksetMTM vastaus = new vastauksetMTM();
+				kysymys.setId(Kysymys_Id);
+				vastaus.setEhdokas(ehdokas);
+				vastaus.setKysymys(kysymys);
+				vastaus.setVastaus(VastausValInt);
+
+				EntityManager em = emf.createEntityManager();
+
+				em.getTransaction().begin();
+				em.persist(vastaus);
+				em.getTransaction().commit();
+		}
 	}
+}
 	
 	@PUT
 	@Path("/updatevastaus")
@@ -101,45 +120,18 @@ public class VaalikoneService {
 		List<vastauksetMTM> list=readVastaus();		
 		return list;
 	}	
-	@DELETE
-	@Path("/deletevastaus/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<vastauksetMTM> deleteVastaus(@PathParam("id") int id) {
-		EntityManager em=emf.createEntityManager();
-		em.getTransaction().begin();
-		vastauksetMTM v=em.find(vastauksetMTM.class, id);
-		if (v!=null) {
-			em.remove(v);
-		}
-		em.getTransaction().commit();
-		List<vastauksetMTM> list=readVastaus();		
-		return list;
-	}	
 	@GET
 	@Path("/deletevastaus/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void deleteVastausByGet(@PathParam("id") int id, 
-			@Context HttpServletRequest request,
-			@Context HttpServletResponse response
-			) {
-		EntityManager em=emf.createEntityManager();
+	public void deleteVastaus(@PathParam("id") int id) {
+		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		vastauksetMTM v=em.find(vastauksetMTM.class, id);
-		if (v!=null) {
+		vastauksetMTM v = em.find(vastauksetMTM.class, id);
+		if (v != null) {
 			em.remove(v);
 		}
 		em.getTransaction().commit();
-		List<vastauksetMTM> list=readVastaus();		
-		
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/ShowVastaukset.jsp");
-		request.setAttribute("VastausLista", list);
-		try {
-			rd.forward(request, response);
-		} catch (ServletException | IOException e) {
-			e.printStackTrace();
-		}
+//		readQuestions();
 	}
 	
 	@GET
