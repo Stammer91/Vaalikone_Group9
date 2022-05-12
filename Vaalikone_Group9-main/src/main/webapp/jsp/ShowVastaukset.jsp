@@ -10,13 +10,16 @@
 <%@ include file="../header.html" %>
 
 <form action="/rest/vaalikoneservice/addvastaus" method="post">
+<select name="ehdokasvalinta" id="ehdokasvalinta">
 <c:forEach var="ehdokas" items="${requestScope.EhdokasLista}" >
-<option value="${ehdokas.aanestysnumero}">${ehdokas.sukunimi} ${ehdokas.etunimi}</option>
+<option value="${ehdokas.aanestysnumero}">${ehdokas.etunimi} ${ehdokas.sukunimi}</option>
 </c:forEach>
+</select>
 <br><br>
 
 <c:forEach var="kysymys" items="${requestScope.KysymysLista}" >
-<li><b>${kysymys.id} "${kysymys.kysymys}"</b><br>
+<b>${kysymys.id} "${kysymys.kysymys}"</b><br>
+<table>
 <input type="radio" id="r1" name="valinta1${kysymys.id}" value="1">
 <label for="r1">Täysin eri mieltä</label>
 <input type="radio" id="r2" name="valinta2${kysymys.id}" value="2">
@@ -26,24 +29,27 @@
 <input type="radio" id="r4" name="valinta4${kysymys.id}" value="4">
 <label for="r4">Jokseenkin samaa mieltä</label>
 <input type="radio" id="r5" name="valinta5${kysymys.id}" value="5">
-<label for="r5">Täysin samaa mieltä</label><br>
+<label for="r5">Täysin samaa mieltä</label>
+</table>
 <br>
 </c:forEach>
 <br><br>
-<input type="submit" id="postvastaus" name="submitvastaus" value="Vastaus"> 
+<input type="submit" id="postvastaus" name="submitvastaus" value="Lähetä vastaukset"> 
 </form>
 
-<ol>
+<br><br>
 <c:forEach var="vastaus" items="${requestScope.VastausLista}" >
-<li><b>ID:</b>${vastaus.id}, "${vastaus.vastaus}" <a href='/rest/vaalikoneservice/deleteanswer/${vastaus.id}'>Poista vastaus</a>
+<b>ID:</b>${vastaus.id}, "${vastaus.vastaus}" <a href='/rest/vaalikoneservice/deleteanswer/${vastaus.id}'>Poista vastaus<br><br></a>
 </c:forEach>
-</ol>
 
-<form action="/rest/vaalikoneservice/sendvastaus" method="post">
-<c:forEach var="ehdokas" items="${requestScope.EhdokasLista}" >
-<option value="${ehdokas.aanestysnumero}">${ehdokas.sukunimi} ${ehokas.etunimi}</option>
+
+<form action="/rest/vaalikoneservice/updatevastaus" method="post">
+<select name="ehdokasvalinta" id="ehdokasvalinta">
+<c:forEach var="ehdokas" items="${requestScope.EhdokasLista}">
+<option value="${ehdokas.aanestysnumero}">${ehdokas.etunimi} ${ehdokas.sukunimi}</option>
 </c:forEach>
-<input type="submit" value="Valitse ehdokas">  
+</select>
+<input type="submit" value="Muokkaa vastauksia">
 </form>
 
 <%@ include file="../footer.html" %>

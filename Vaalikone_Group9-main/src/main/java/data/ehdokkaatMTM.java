@@ -23,14 +23,14 @@ public class ehdokkaatMTM implements Serializable {
 
 	@Column(name = "Etunimi")
 	private String etunimi;
+	
+	private String sukunimi;
 
 	private String kotipaikkakunta;
 
 	private String puolue;
 
 	private String ammatti;
-
-	private String sukunimi;
 
 	
 	@OneToMany(mappedBy = "ehdokas")
@@ -104,6 +104,14 @@ public class ehdokkaatMTM implements Serializable {
 	public void setEtunimi(String etunimi) {
 		this.etunimi = etunimi;
 	}
+	
+	public String getSukunimi() {
+		return this.sukunimi;
+	}
+
+	public void setSukunimi(String sukunimi) {
+		this.sukunimi = sukunimi;
+	}
 
 	public String getKotipaikkakunta() {
 		return this.kotipaikkakunta;
@@ -127,14 +135,6 @@ public class ehdokkaatMTM implements Serializable {
 
 	public void setAmmatti(String ammatti) {
 		this.ammatti = ammatti;
-	}
-
-	public String getSukunimi() {
-		return this.sukunimi;
-	}
-
-	public void setSukunimi(String sukunimi) {
-		this.sukunimi = sukunimi;
 	}
 
 	public List<vastauksetMTM> getVastaus() {
