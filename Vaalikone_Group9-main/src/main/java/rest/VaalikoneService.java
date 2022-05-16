@@ -41,38 +41,6 @@ public class VaalikoneService {
 	@Context HttpServletRequest request;
 	@Context HttpServletResponse response;
 	
-	
-	@GET
-	@Path("/readvastaukset")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void readVastaukset() {
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		List<vastauksetMTM> list = em.createQuery("select v from vastauksetMTM v").getResultList();
-		em.getTransaction().commit();
-		em.close();
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/ShowVastaukset.jsp");
-		request.setAttribute("VastausLista", list);
-		
-		try {
-			rd.forward(request, response);
-		} catch (ServletException | IOException e) {
-			e.printStackTrace();
-		}
-	}
-	@GET
-	@Path("/readvastaus")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<vastauksetMTM> readVastaus() {
-		EntityManager em=emf.createEntityManager();
-		em.getTransaction().begin();
-		List<vastauksetMTM> list=em.createQuery("select v from vastauksetMTM v").getResultList();		
-		em.getTransaction().commit();
-		return list;
-	}	
-	
 	@POST
 	@Path("/addvastaus")
 	@Consumes("application/x-www-form-urlencoded")
@@ -105,21 +73,6 @@ public class VaalikoneService {
 	}
 }
 	
-	@PUT
-	@Path("/updatevastaus")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<vastauksetMTM> updateVastaus(vastauksetMTM vastaus) {
-		EntityManager em=emf.createEntityManager();
-		em.getTransaction().begin();
-		vastauksetMTM v=em.find(vastauksetMTM.class, vastaus.getId());
-		if (v!=null) {
-			em.merge(vastaus);
-		}
-		em.getTransaction().commit();
-		List<vastauksetMTM> list=readVastaus();		
-		return list;
-	}	
 	@GET
 	@Path("/deletevastaus/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -131,7 +84,7 @@ public class VaalikoneService {
 			em.remove(v);
 		}
 		em.getTransaction().commit();
-//		readQuestions();
+
 	}
 	
 	@GET

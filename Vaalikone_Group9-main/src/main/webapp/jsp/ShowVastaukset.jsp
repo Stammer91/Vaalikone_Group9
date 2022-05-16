@@ -42,14 +42,4 @@
 <b>${vastaus.id}</b>: <b>${vastaus.ehdokas}</b>, <b>Vastaus:</b>"${vastaus.vastaus}" <a href='/rest/vaalikoneservice/deletevastaus/${vastaus.id}'>Poista vastaus<br><br></a>
 </c:forEach>
 
-
-<form action="/rest/vaalikoneservice/updatevastaus" method="post">
-<select name="ehdokasvalinta" id="ehdokasvalinta">
-<c:forEach var="ehdokas" items="${requestScope.EhdokasLista}">
-<option value="${ehdokas.aanestysnumero}">${ehdokas.etunimi} ${ehdokas.sukunimi}</option>
-</c:forEach>
-</select>
-<input type="submit" value="Muokkaa vastauksia">
-</form>
-
 <%@ include file="../footer.html" %>
